@@ -4,21 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity">
+    tools:context=".LendExplorePageFragment">
 
+    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="signup page"
-        tools:layout_editor_absoluteX="102dp"
-        tools:layout_editor_absoluteY="366dp" />
-
-    <Button
-        android:id="@+id/signUpToHomeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign up"
-        tools:layout_editor_absoluteX="102dp"
-        tools:layout_editor_absoluteY="493dp" />
+        android:text="Explore Page: Lend"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="25dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

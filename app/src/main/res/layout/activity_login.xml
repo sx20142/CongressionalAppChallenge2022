@@ -4,18 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity"
+    tools:context=".LoginActivity"
     android:padding="20dp">
 
-    <!--welcome text-->
+    <!--hello text-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hello_txt"
+        android:text="hello!"
+        android:textSize="50sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <!--welcome back text-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/welcome_txt"
-        android:text="welcome"
-        android:textSize="30sp"
+        android:text="welcome back"
+        android:textSize="50sp"
+        android:layout_below="@+id/hello_txt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="10dp"/>
 
     <!--email input-->
     <com.google.android.material.textfield.TextInputLayout
@@ -47,26 +58,25 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!--sign up button-->
+    <!--login button-->
     <Button
-        android:id="@+id/signup_btn"
+        android:id="@+id/login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/password_til"
-        android:text="Sign Up"
+        android:text="Login"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="25sp" />
 
-    <!--already have an account text-->
+    <!--don't have an account text-->
     <TextView
-        android:id="@+id/haveAccount_txt"
+        android:id="@+id/noAccount_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Already have account? Login."
+        android:text="Don't have an account? Sign up."
         android:textAlignment="center"
-        android:layout_below="@+id/signup_btn"
+        android:layout_below="@+id/login_btn"
         android:layout_marginTop="30dp"
         android:textColor="@color/black"/>
-
 </RelativeLayout>

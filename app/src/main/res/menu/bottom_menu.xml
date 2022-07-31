@@ -3,22 +3,22 @@
 
     <item
         android:id="@+id/explorePageFragment"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_baseline_home_24"
         android:title="Home" />
 
     <item
         android:id="@+id/searchPageFragment"
-        android:icon="@drawable/ic_search"
+        android:icon="@drawable/ic_baseline_search_24"
         android:title="Search" />
 
     <item
         android:id="@+id/addPostFragment"
-        android:icon="@drawable/ic_add_circle_outline"
+        android:icon="@drawable/ic_baseline_add_circle_outline_24"
         android:title="" />
 
     <item
         android:id="@+id/notificationsFragment"
-        android:icon="@drawable/ic_notifications"
+        android:icon="@drawable/ic_baseline_notifications_24"
         android:title="Notifications" />
 
     <item

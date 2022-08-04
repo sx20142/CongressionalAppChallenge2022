@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                             //sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             //user is logged in, so start LoginActivity
-                            startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
+                            startActivity(new Intent(LoginActivity.this, HomeScreenActivity.class));
                             finish();
                         }
                         else {

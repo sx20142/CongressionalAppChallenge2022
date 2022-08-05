@@ -16,7 +16,7 @@
         android:theme="@style/Theme.ShareME"
         tools:targetApi="31">
         <activity
-            android:name=".ProfileActivity"
+            android:name=".DashboardActivity"
             android:exported="true">
         </activity>
         <activity

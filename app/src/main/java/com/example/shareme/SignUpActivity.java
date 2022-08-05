@@ -97,7 +97,7 @@ public class SignUpActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(SignUpActivity.this, "Registered...\n"+user.getEmail(), Toast.LENGTH_SHORT).show();
                             //move to new screen
-                            startActivity(new Intent(SignUpActivity.this, HomeScreenActivity.class));
+                            startActivity(new Intent(SignUpActivity.this, DashboardActivity.class));
                             finish();
                         }
                         else {

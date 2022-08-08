@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     Button login_btn;
     private FirebaseAuth mAuth;
     ProgressDialog progressDialog;
-    private Resources ResourcesCompact;
+    //private Resources ResourcesCompact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +46,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //change fonts
-        TextView helloText = findViewById(R.id.helloText);
+        /*TextView hello_txt = findViewById(R.id.hello_txt);
         Typeface typeface = Typeface.createFromAsset(getAssets(), "hero_bold.ttf");
-        helloText.setTypeface(typeface);
+        hello_txt.setTypeface(typeface);*/
         
         
         //Actionbar and its title

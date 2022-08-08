@@ -10,7 +10,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     //declare variables
-    Button signup_btn, login_btn;
+    Button signUp_btn, login_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,11 +18,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //initialize views
-        signup_btn = findViewById(R.id.signUp_btn);
+        signUp_btn = findViewById(R.id.signUp_btn);
         login_btn = findViewById(R.id.login_btn);
 
         //takes user to sign up page
-        signup_btn.setOnClickListener(new View.OnClickListener() {
+        signUp_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, SignUpActivity.class));

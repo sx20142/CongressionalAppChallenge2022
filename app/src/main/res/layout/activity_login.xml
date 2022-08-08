@@ -8,9 +8,17 @@
     android:padding="20dp"
     tools:context=".LoginActivity">
 
+    <!-- logo image -->
+    <ImageView
+        android:layout_width="77dp"
+        android:layout_height="69dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/logo_nowords" />
+
     <!--hello text-->
     <TextView
-        android:id="@+id/helloText"
+        android:id="@+id/hello_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -18,11 +26,12 @@
         android:text="Hello!"
         android:textColor="#FFB900"
         android:textSize="55dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/hero_regular"/>
 
     <!--welcome back text-->
     <TextView
-        android:id="@+id/welcomeText"
+        android:id="@+id/welcome_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -30,16 +39,6 @@
         android:text="WELCOME BACK"
         android:textColor="#FFB900"
         android:textSize="30dp" />
-
-
-    <!-- logo image -->
-    <ImageView
-        android:id="@+id/squirrelLogo"
-        android:layout_width="77dp"
-        android:layout_height="69dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/squirrellogo" />
 
     <!--email input-->
     <com.google.android.material.textfield.TextInputLayout

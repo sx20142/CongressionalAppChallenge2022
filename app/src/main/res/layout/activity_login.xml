@@ -4,39 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:padding="20dp">
+    android:background="#FFFFFF"
+    android:padding="20dp"
+    tools:context=".LoginActivity">
 
     <!--hello text-->
     <TextView
+        android:id="@+id/helloText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/hello_txt"
-        android:text="hello!"
-        android:textSize="50sp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="120dp"
+        android:text="Hello!"
+        android:textColor="#FFB900"
+        android:textSize="55dp"
+        android:textStyle="bold" />
 
     <!--welcome back text-->
     <TextView
+        android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/welcome_txt"
-        android:text="welcome back"
-        android:textSize="50sp"
-        android:layout_below="@+id/hello_txt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="195dp"
+        android:text="WELCOME BACK"
+        android:textColor="#FFB900"
+        android:textSize="30dp" />
+
+
+    <!-- logo image -->
+    <ImageView
+        android:id="@+id/squirrelLogo"
+        android:layout_width="77dp"
+        android:layout_height="69dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/squirrellogo" />
 
     <!--email input-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_til"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:textColorHint="#FFB900"
+        app:boxBackgroundColor="@color/white">
+
         <EditText
             android:id="@+id/email_input"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="Email"
             android:inputType="textEmailAddress" />
@@ -45,38 +61,49 @@
     <!--password input-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_til"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/email_til"
         android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:textColorHint="#FFB900"
+        app:boxBackgroundColor="@color/white"
         app:passwordToggleEnabled="true">
+
         <EditText
             android:id="@+id/pass_input"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="Password"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!--login button-->
+
+    <!--don't have an account text-->
+
     <Button
         android:id="@+id/login_btn"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/password_til"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:text="Login"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        app:backgroundTint="#FFB900" />
 
-    <!--don't have an account text-->
     <TextView
         android:id="@+id/noAccount_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/login_btn"
+        android:layout_marginTop="10dp"
         android:text="Don't have an account? Sign up."
         android:textAlignment="center"
-        android:layout_below="@+id/login_btn"
-        android:layout_marginTop="30dp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black" />
+
+
 </RelativeLayout>

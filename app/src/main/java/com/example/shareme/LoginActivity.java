@@ -3,10 +3,17 @@ package com.example.shareme;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
+import android.content.res.Resources;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.widget.TextView;
 import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -31,12 +38,19 @@ public class LoginActivity extends AppCompatActivity {
     Button login_btn;
     private FirebaseAuth mAuth;
     ProgressDialog progressDialog;
+    private Resources ResourcesCompact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //change fonts
+        TextView helloText = findViewById(R.id.helloText);
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "hero_bold.ttf");
+        helloText.setTypeface(typeface);
+        
+        
         //Actionbar and its title
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Login");

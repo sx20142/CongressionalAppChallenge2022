@@ -1,43 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignUpActivity"
+    android:orientation="vertical"
     android:padding="20dp">
 
     <ImageView
+        android:id="@+id/logo"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_above="@id/welcome_txt"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="47dp"
         android:maxWidth="15dp"
         android:maxHeight="2dp"
         android:src="@drawable/logo_nowords"
-        android:translationY="-50dp"/>
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"/>
 
     <!--welcome text-->
     <TextView
         android:id="@+id/welcome_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/email_til"
+        android:layout_below="@+id/logo"
         android:text="welcome"
         android:textColor="@color/orange_yellow"
         android:textSize="45sp"
         android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:translationY="-95dp"/>
+        android:layout_gravity="center_horizontal"/>
+
+    <!--first name input-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fname_til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcome_txt"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="35dp">
+        <EditText
+            android:id="@+id/fname_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="First Name"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--last name input-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lname_til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fname_til"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp">
+        <EditText
+            android:id="@+id/lname_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Last Name"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!--email input-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_til"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginHorizontal="10dp">
+        android:layout_below="@id/lname_til"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp">
         <EditText
             android:id="@+id/email_input"
             android:layout_width="match_parent"
@@ -52,10 +82,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/email_til"
-        android:layout_centerInParent="true"
         app:passwordToggleEnabled="true"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="10dp">
         <EditText
             android:id="@+id/pass_input"
             android:layout_width="match_parent"
@@ -70,8 +99,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/password_til"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="35dp"
         android:paddingHorizontal="40dp"
         android:paddingVertical="10dp"
         android:text="Sign Up"
@@ -86,11 +115,11 @@
         android:id="@+id/haveAccount_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Already have account? Login."
-        android:textAlignment="center"
-        android:textSize="17sp"
         android:layout_below="@+id/signup_btn"
         android:layout_marginTop="30dp"
-        android:textColor="@color/black"/>
+        android:text="Already have account? Login."
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
 
-</RelativeLayout>
+</LinearLayout>

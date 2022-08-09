@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerVertical="true"
     tools:context=".SignUpActivity"
     android:orientation="vertical"
     android:padding="20dp">
@@ -15,7 +16,7 @@
         android:maxWidth="15dp"
         android:maxHeight="2dp"
         android:src="@drawable/logo_nowords"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"/>
 
     <!--welcome text-->
@@ -100,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/password_til"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="30dp"
         android:paddingHorizontal="40dp"
         android:paddingVertical="10dp"
         android:text="Sign Up"
@@ -116,7 +117,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/signup_btn"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:text="Already have account? Login."
         android:textAlignment="center"
         android:textColor="@color/black"

@@ -25,7 +25,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,10 +59,7 @@ public class AddPostFragment extends Fragment{
         LendItem_btn.setOnClickListener (new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LendPostFragment lendpostfrag = new LendPostFragment();
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.addPost_fragment, lendpostfrag, lendpostfrag.getTag())
-                        .commit();
+                startActivity(new Intent(getActivity(), LendPostActivity.class));
             }
         });
 
@@ -71,10 +67,7 @@ public class AddPostFragment extends Fragment{
         BorrowItem_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BorrowPostFragment borrowpostfrag = new BorrowPostFragment();
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.addPost_fragment, borrowpostfrag, borrowpostfrag.getTag())
-                        .commit();
+                startActivity(new Intent(getActivity(), BorrowPostActivity.class));
             }
         });
         return view;

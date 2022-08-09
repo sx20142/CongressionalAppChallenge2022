@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="25dp"
-    tools:context=".SignUpActivity">
+    tools:context=".LendPostActivity">
 
     <EditText
         android:id="@+id/item_name"

@@ -11,4 +11,19 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string-array name="item_categories">
+        <item>category</item>
+        <item>cleaning</item>
+        <item>stationary</item>
+        <item>laundry</item>
+        <item>other</item>
+    </string-array>
+
+    <string-array name="item_urgency">
+        <item>urgency</item>
+        <item>need right now</item>
+        <item>need in a few hours</item>
+        <item>need in a few days</item>
+    </string-array>
 </resources>

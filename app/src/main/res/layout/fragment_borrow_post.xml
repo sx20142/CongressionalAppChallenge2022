@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SignUpActivity"
+    android:padding="25dp">
+
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Title"
+        android:minHeight="80dp"
+        android:padding="10dp"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="start"
+        android:hint="Description"
+        android:layout_below = "@+id/title"
+        android:inputType="textCapSentences|textMultiLine"
+        android:minHeight="100dp"
+        android:singleLine="true" />
+
+    <Spinner
+        android:id="@+id/category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/description"
+        android:hint="Category"
+        android:minHeight="70dp"
+        android:visibility="visible" />
+
+    <Spinner
+        android:id="@+id/urgency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/category"
+        android:minHeight = "70dp"
+        android:hint="Urgency"
+        android:visibility="visible" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="80dp"
+        android:hint ="Loan Duration"
+        android:singleLine="true"/>
+
+    <Button
+        android:id="@+id/upload"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/urgency"
+        android:layout_marginTop="20sp"
+        android:text="Create Post"
+        android:textAlignment="center" />
+
+</LinearLayout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerVertical="true"
+    tools:context=".FirstSignUpActivity"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:maxWidth="15dp"
+        android:maxHeight="2dp"
+        android:src="@drawable/logo_nowords"
+        android:layout_marginTop="80dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <!--find university text-->
+    <TextView
+        android:id="@+id/findUni_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:text="find your school:"
+        android:textColor="@color/orange_yellow"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"/>
+
+    <!--university spinner-->
+    <Spinner
+        android:id="@+id/school_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="10dp"
+        android:spinnerMode="dropdown" />
+
+    <!--enter residential hall text-->
+    <TextView
+        android:id="@+id/enterResHall_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/school_spinner"
+        android:text="enter your residential hall:"
+        android:textColor="@color/orange_yellow"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"/>
+
+    <!--residential hall input-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/resHall_til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/enterResHall_txt"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp">
+        <EditText
+            android:id="@+id/resHall_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Residential Hall" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--sign up button-->
+    <Button
+        android:id="@+id/signUp_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/resHall_til"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="10dp"
+        android:text="Sign Up"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:cornerRadius="50dp"
+        android:backgroundTint="@color/orange_yellow"/>
+
+</LinearLayout>

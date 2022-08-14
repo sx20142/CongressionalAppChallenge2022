@@ -20,10 +20,11 @@
         <entry key="app/src/main/res/layout/activity_home_screen.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_lend_post.xml" value="0.2980072463768116" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.30448760986328127" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.34626464843750004" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.10688956433637285" />
         <entry key="app/src/main/res/layout/activity_second.xml" value="0.2884963768115942" />
-        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.23852386474609377" />
+        <entry key="app/src/main/res/layout/activity_second_sign_up.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_add_post.xml" value="0.2884963768115942" />
         <entry key="app/src/main/res/layout/fragment_borrow_post.xml" value="0.36354166666666665" />
         <entry key="app/src/main/res/layout/fragment_lend_explore_page.xml" value="0.1" />

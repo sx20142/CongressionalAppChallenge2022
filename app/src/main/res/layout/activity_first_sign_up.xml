@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerVertical="true"
-    tools:context=".SignUpActivity"
+    tools:context=".FirstSignUpActivity"
     android:orientation="vertical"
     android:padding="20dp">
 
@@ -16,7 +16,7 @@
         android:maxWidth="15dp"
         android:maxHeight="2dp"
         android:src="@drawable/logo_nowords"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         android:layout_gravity="center_horizontal"/>
 
     <!--welcome text-->
@@ -31,34 +31,34 @@
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"/>
 
-    <!--first name input-->
+    <!--name input-->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fname_til"
+        android:id="@+id/name_til"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/welcome_txt"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="35dp">
         <EditText
-            android:id="@+id/fname_input"
+            android:id="@+id/name_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="First Name"/>
+            android:hint="Full Name"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!--last name input-->
+    <!--phone number input-->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lname_til"
+        android:id="@+id/phoneNum_til"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/fname_til"
+        android:layout_below="@id/name_til"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp">
         <EditText
-            android:id="@+id/lname_input"
+            android:id="@+id/phoneNum_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Last Name"/>
+            android:hint="Phone Number"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <!--email input-->
@@ -66,7 +66,7 @@
         android:id="@+id/email_til"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/lname_til"
+        android:layout_below="@id/phoneNum_til"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp">
         <EditText
@@ -94,9 +94,9 @@
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!--sign up button-->
+    <!--next button-->
     <Button
-        android:id="@+id/signup_btn"
+        android:id="@+id/next_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/password_til"
@@ -104,7 +104,7 @@
         android:layout_marginTop="30dp"
         android:paddingHorizontal="40dp"
         android:paddingVertical="10dp"
-        android:text="Sign Up"
+        android:text="Next"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="25sp"
@@ -116,7 +116,7 @@
         android:id="@+id/haveAccount_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signup_btn"
+        android:layout_below="@+id/next_btn"
         android:layout_marginTop="15dp"
         android:text="Already have account? Login."
         android:textAlignment="center"

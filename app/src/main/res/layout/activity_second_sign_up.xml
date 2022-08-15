@@ -32,14 +32,29 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"/>
 
-    <!--university spinner-->
-    <Spinner
+    <!--university dropdown-->
+    <!--<Spinner
         android:id="@+id/school_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginHorizontal="10dp"
-        android:spinnerMode="dropdown" />
+        android:spinnerMode="dropdown" />-->
+    <EditText
+        android:id="@+id/school_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/findUni_txt"
+        android:hint="Texas schools..."
+        android:layout_marginHorizontal="10dp"/>
+
+    <ListView
+        android:id="@+id/school_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/school_input"
+        android:layout_marginHorizontal="10dp"
+        android:visibility="gone"/>
 
     <!--enter residential hall text-->
     <TextView

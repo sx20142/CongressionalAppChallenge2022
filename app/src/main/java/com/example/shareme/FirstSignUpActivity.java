@@ -24,10 +24,9 @@ import com.google.firebase.auth.FirebaseUser;
 public class FirstSignUpActivity extends AppCompatActivity {
 
     //declare variables
-    EditText email_input, password_input;
+    EditText name_input, phoneNum_input, email_input, password_input;
     Button next_btn;
     TextView haveAccount_txt;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +41,8 @@ public class FirstSignUpActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
         //initialize variables
+        name_input = findViewById(R.id.name_input);
+        phoneNum_input = findViewById(R.id.phoneNum_input);
         email_input = findViewById(R.id.email_input);
         password_input = findViewById(R.id.pass_input);
         next_btn = findViewById(R.id.next_btn);
@@ -51,9 +52,29 @@ public class FirstSignUpActivity extends AppCompatActivity {
         next_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = name_input.getText().toString().trim();
+                String phoneNum = phoneNum_input.getText().toString().trim();
                 String email = email_input.getText().toString().trim();
                 String password = password_input.getText().toString().trim();
-                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                if (name.length() == 0) {
+                    name_input.setError("Please enter your name");
+                    name_input.setFocusable(true);
+                }
+                else if (phoneNum.length() == 0 || phoneNum.length() > 12 || phoneNum.length() < 12 || phoneNum.length() == 12) {
+                    if (phoneNum.length() == 12) {
+                        for (int i = 0; i < phoneNum.length(); i++) {
+                            if (phoneNum.charAt(i) != '-' || !Character.isDigit(phoneNum.charAt(i))) {
+                                phoneNum_input.setError("Invalid phone number");
+                                phoneNum_input.setFocusable(true);
+                            }
+                        }
+                    }
+                    else {
+                        phoneNum_input.setError("Invalid phone number");
+                        phoneNum_input.setFocusable(true);
+                    }
+                }
+                else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     email_input.setError("Invalid Email");
                     email_input.setFocusable(true);
                 }
@@ -61,10 +82,12 @@ public class FirstSignUpActivity extends AppCompatActivity {
                     password_input.setError("Password length must be at least 6 characters");
                     password_input.setFocusable(true);
                 }
-                Intent intent = new Intent(FirstSignUpActivity.this, SecondSignUpActivity.class);
-                intent.putExtra("userEmail", email_input.getText().toString().trim());
-                intent.putExtra("userPass", password_input.getText().toString().trim());
-                startActivity(intent);
+                else {
+                    Intent intent = new Intent(FirstSignUpActivity.this, SecondSignUpActivity.class);
+                    intent.putExtra("userEmail", email_input.getText().toString().trim());
+                    intent.putExtra("userPass", password_input.getText().toString().trim());
+                    startActivity(intent);
+                }
             }
         });
 

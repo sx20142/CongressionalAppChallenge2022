@@ -8,13 +8,17 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -33,7 +37,10 @@ import java.util.List;
 public class SecondSignUpActivity extends AppCompatActivity {
 
     //declare variables
-    Spinner school_spinner;
+    //Spinner school_spinner;
+    EditText school_input;
+    ListView school_list;
+    ArrayAdapter<String> adapter;
     String email, password;
     Button signUp_btn;
     ProgressDialog progressDialog; //progressbar to display while registering user
@@ -54,15 +61,19 @@ public class SecondSignUpActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         //initialize variables
-        school_spinner = findViewById(R.id.school_spinner);
+        //school_spinner = findViewById(R.id.school_spinner);
+        school_input = findViewById(R.id.school_input);
+        school_list = findViewById(R.id.school_list);
         email = intent.getStringExtra("userEmail");
         password = intent.getStringExtra("userPass");
         signUp_btn = findViewById(R.id.signUp_btn);
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
 
+        school_list.setTextFilterEnabled(true);
         progressDialog.setMessage("Registering User...");
 
+        //list of texas schools
         String[] texas_schools = new String[] {
                 "Texas schools...",
                 "Abilene Christian University",
@@ -188,7 +199,7 @@ public class SecondSignUpActivity extends AppCompatActivity {
                 "Wiley College"
         };
 
-        List<String> texasSchools_list = new ArrayList<>(Arrays.asList(texas_schools));
+        /*List<String> texasSchools_list = new ArrayList<>(Arrays.asList(texas_schools));
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, texasSchools_list) {
             @Override
             public boolean isEnabled (int position) {
@@ -209,8 +220,47 @@ public class SecondSignUpActivity extends AppCompatActivity {
             }
         };
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        school_spinner.setAdapter(adapter);
+        school_spinner.setAdapter(adapter);*/
 
+        //sets an adapter to display the school list (listview)
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, texas_schools);
+        school_list.setAdapter(adapter);
+
+        //filters the school list based on user input
+        school_input.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                SecondSignUpActivity.this.adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        //auto completes the user input when school is clicked
+        school_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String school = school_list.getItemAtPosition(position).toString();
+                school_input.setText(school);
+                school_list.setVisibility(View.GONE);
+            }
+        });
+
+        //makes the school list visibles
+        school_input.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                school_list.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //registers user once sign up button is clicked
         signUp_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

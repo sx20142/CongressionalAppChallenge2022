@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "21398518517",
-    "project_id": "shareme-c0b3d",
-    "storage_bucket": "shareme-c0b3d.appspot.com"
+    "project_number": "963493135957",
+    "project_id": "shareme-e7817",
+    "storage_bucket": "shareme-e7817.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:21398518517:android:d0494f29233ae8db1323bc",
+        "mobilesdk_app_id": "1:963493135957:android:e98341d15d45d53c4cf6dc",
         "android_client_info": {
           "package_name": "com.example.shareme"
         }
       },
       "oauth_client": [
         {
-          "client_id": "21398518517-hetd6nuvphghep2o0h9qin2ogb3e6o8a.apps.googleusercontent.com",
+          "client_id": "963493135957-uodnp3a1kqao8v52v13hoprrtgpl8f7q.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDgGt1TjU9sYFJH09cFvdcL4T2ogLHeuug"
+          "current_key": "AIzaSyBsOPrJnT8xTLdwcqtwWOVHTtcayXIgrI8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "21398518517-hetd6nuvphghep2o0h9qin2ogb3e6o8a.apps.googleusercontent.com",
+              "client_id": "963493135957-uodnp3a1kqao8v52v13hoprrtgpl8f7q.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

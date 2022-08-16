@@ -26,18 +26,20 @@
         <!--login in button-->
         <Button
             android:id="@+id/login_btn"
-            android:layout_width="140dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="25dp"
             android:text="Log in"
             app:backgroundTint="#FFB900" />
 
         <!--sign up button-->
         <Button
             android:id="@+id/signUp_btn"
-            android:layout_width="140dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="25dp"
             android:text="Sign Up"
             app:backgroundTint="#FFB900"/>
     </LinearLayout>

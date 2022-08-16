@@ -19,6 +19,9 @@
         android:theme="@style/Theme.ShareME"
         tools:targetApi="31">
         <activity
+            android:name=".SecondSignUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".BorrowPostActivity"
             android:exported="false" />
         <activity
@@ -40,7 +43,7 @@
             android:name=".HomeScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".FirstSignUpActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"

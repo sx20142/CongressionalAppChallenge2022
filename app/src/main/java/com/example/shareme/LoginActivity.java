@@ -3,24 +3,15 @@ package com.example.shareme;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 
-import android.content.res.Resources;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -90,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
         noAccount_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+                startActivity(new Intent(LoginActivity.this, FirstSignUpActivity.class));
             }
         });
         //initialize progress dialog

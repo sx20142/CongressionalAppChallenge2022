@@ -60,20 +60,20 @@ public class FirstSignUpActivity extends AppCompatActivity {
                     name_input.setError("Please enter your name");
                     name_input.setFocusable(true);
                 }
-                else if (phoneNum.length() == 0 || phoneNum.length() > 12 || phoneNum.length() < 12 || phoneNum.length() == 12) {
-                    if (phoneNum.length() == 12) {
-                        for (int i = 0; i < phoneNum.length(); i++) {
-                            if (phoneNum.charAt(i) != '-' || !Character.isDigit(phoneNum.charAt(i))) {
-                                phoneNum_input.setError("Invalid phone number");
-                                phoneNum_input.setFocusable(true);
-                            }
-                        }
-                    }
-                    else {
-                        phoneNum_input.setError("Invalid phone number");
-                        phoneNum_input.setFocusable(true);
-                    }
-                }
+//                else if (phoneNum.length() == 0 || phoneNum.length() > 12 || phoneNum.length() < 12 || phoneNum.length() == 12) {
+//                    if (phoneNum.length() == 12) {
+//                        for (int i = 0; i < phoneNum.length(); i++) {
+//                            if (phoneNum.charAt(i) != '-' || !Character.isDigit(phoneNum.charAt(i))) {
+//                                phoneNum_input.setError("Invalid phone number");
+//                                phoneNum_input.setFocusable(true);
+//                            }
+//                        }
+//                    }
+//                    else {
+//                        phoneNum_input.setError("Invalid phone number");
+//                        phoneNum_input.setFocusable(true);
+//                    }
+//                }
                 else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     email_input.setError("Invalid Email");
                     email_input.setFocusable(true);

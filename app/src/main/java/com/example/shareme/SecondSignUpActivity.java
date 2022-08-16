@@ -29,9 +29,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class SecondSignUpActivity extends AppCompatActivity {
@@ -198,29 +201,6 @@ public class SecondSignUpActivity extends AppCompatActivity {
                 "Wiley College"
         };
 
-        /*List<String> texasSchools_list = new ArrayList<>(Arrays.asList(texas_schools));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, texasSchools_list) {
-            @Override
-            public boolean isEnabled (int position) {
-                if (position == 0)
-                    return false;
-                else
-                    return true;
-            }
-            @Override
-            public View getDropDownView (int position, View convertView, ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if (position == 0)
-                    tv.setTextColor(Color.GRAY);
-                else
-                    tv.setTextColor(Color.BLACK);
-                return view;
-            }
-        };
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        school_spinner.setAdapter(adapter);*/
-
         //sets an adapter to display the school list (listview)
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, texas_schools);
         school_list.setAdapter(adapter);
@@ -280,6 +260,24 @@ public class SecondSignUpActivity extends AppCompatActivity {
                             //Sign in success, dismiss dialog and start register activity
                             progressDialog.dismiss();
                             FirebaseUser user = mAuth.getCurrentUser();
+                            //get user email and uid from auth
+                            String email = user.getEmail();
+                            String uid = user.getUid();
+                            //when user is registered, store user info in firebase realtime database using hashmap
+                            HashMap<Object, String> userInfo_hash = new HashMap<>();
+                            //put info in hashmap
+                            userInfo_hash.put("email", email);
+                            userInfo_hash.put("uid", uid);
+                            userInfo_hash.put("name", "");
+                            userInfo_hash.put("phone", "");
+                            userInfo_hash.put("image", "");
+                            //firebase database instance
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            //path to store user data names "Users"
+                            DatabaseReference db_reference = database.getReference("Users");
+                            //put data within hashmap in database
+                            db_reference.child(uid).setValue(userInfo_hash);
+
                             Toast.makeText(SecondSignUpActivity.this, "Registered...\n"+user.getEmail(), Toast.LENGTH_SHORT).show();
                             //move to new screen
                             startActivity(new Intent(SecondSignUpActivity.this, DashboardActivity.class));

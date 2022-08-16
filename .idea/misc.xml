@@ -3,6 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.1" />
+        <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1" />
+        <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.1" />
+        <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1" />
+        <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/drawable/ic_person.xml" value="0.1" />
+        <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/layout/activity_dashboard.xml" value="0.10733695652173914" />
+        <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/layout/activity_home_screen.xml" value="0.10733695652173914" />
+        <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/app/src/main/res/layout/activity_home_screen.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/app/src/main/res/layout/activity_second.xml" value="0.24739583333333334" />

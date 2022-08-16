@@ -29,6 +29,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -104,6 +108,23 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             //sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
+                            String email = user.getEmail();
+                            String uid = user.getUid();
+                            //When user is registered store user info in firebase realtime database using HashMap
+                            HashMap<Object, String> hashMap = new HashMap<>();
+                            //put info in hashmap
+                            hashMap.put("email", email);
+                            hashMap.put("uid", uid);
+                            hashMap.put("name", ""); //will add later
+                            hashMap.put("phone", "");
+                            hashMap.put("image", "");
+
+                            //firebase database instance
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+                            DatabaseReference reference = database.getReference("Users");
+
+                            reference.child(uid).setValue(hashMap);
                             //user is logged in, so start LoginActivity
                             startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                             finish();

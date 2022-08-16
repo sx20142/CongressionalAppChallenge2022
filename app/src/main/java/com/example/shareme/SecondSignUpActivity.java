@@ -75,7 +75,6 @@ public class SecondSignUpActivity extends AppCompatActivity {
 
         //list of texas schools
         String[] texas_schools = new String[] {
-                "Texas schools...",
                 "Abilene Christian University",
                 "Amarillo College",
                 "Amberton University",

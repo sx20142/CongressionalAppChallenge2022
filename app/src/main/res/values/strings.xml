@@ -26,4 +26,13 @@
         <item>need in a few hours</item>
         <item>need in a few days</item>
     </string-array>
+
+    <string-array name="item_duration">
+        <item>duration</item>
+    <item>a few hours</item>
+    <item>one day</item>
+    <item>a couple days</item>
+    <item>a week</item>
+</string-array>
+
 </resources>

@@ -27,11 +27,11 @@
         android:visibility="visible" />
 
     <Spinner
-        android:id="@+id/urgency"
+        android:id="@+id/duration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/category"
-        android:hint="Urgency"
+        android:hint="Duration"
         android:minHeight="70dp"
         android:visibility="visible" />
 

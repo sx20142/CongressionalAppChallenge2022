@@ -72,7 +72,7 @@ public class ProfileFragment<ModelPost> extends Fragment {
 
     //view from xml
     ImageView avatarIv;
-    TextView nameTv, emailTv, phoneTv;
+    TextView nameTv, emailTv, phoneTv, schoolTv, hallTv;
     FloatingActionButton fab;
     RecyclerView postsRecyclerView;
 
@@ -124,8 +124,10 @@ public class ProfileFragment<ModelPost> extends Fragment {
         nameTv=view.findViewById(R.id.nameTv);
         emailTv=view.findViewById(R.id.emailTv);
         phoneTv=view.findViewById(R.id.phoneTv);
+        schoolTv=view.findViewById(R.id.schoolTv);
+        hallTv=view.findViewById(R.id.hallTv);
         fab = view.findViewById(R.id.fab);
-        postsRecyclerView = view.findViewById(R.id.recyclerview_posts);
+//        postsRecyclerView = view.findViewById(R.id.recyclerview_posts);
 
         //init progress dialog
         pd = new ProgressDialog(getActivity());
@@ -142,11 +144,16 @@ public class ProfileFragment<ModelPost> extends Fragment {
                     String email = ""+ds.child("email").getValue();
                     String phone = ""+ds.child("phone").getValue();
                     String image = ""+ds.child("image").getValue();
+                    String school = ""+ds.child("school").getValue();
+                    String hall = ""+ds.child("hall").getValue();
 
                     //set data
                     nameTv.setText(name);
                     emailTv.setText(email);
                     phoneTv.setText(phone);
+                    schoolTv.setText(school);
+                    hallTv.setText(hall);
+
                     try{
                         Picasso.get().load(image).into(avatarIv);
 
@@ -220,7 +227,7 @@ public class ProfileFragment<ModelPost> extends Fragment {
          * 4) Edit Phone*/
 
         //options to show in dialog
-        String options[] = {"Edit Profile Picture", "Edit Name", "Edit Phone"};
+        String options[] = {"Edit Profile Picture", "Edit Name", "Edit Phone", "Edit School", "Edit Residential Hall"};
         //alert dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         //set title
@@ -244,6 +251,16 @@ public class ProfileFragment<ModelPost> extends Fragment {
                     //Edit Phone clicked
                     pd.setMessage("Updating Phone");
                     showNamePhoneUpdateDialog("phone");
+                }
+                else if (which == 3) {
+                    //Edit Phone clicked
+                    pd.setMessage("Updating School");
+                    showNamePhoneUpdateDialog("school");
+                }
+                else if (which == 4) {
+                    //Edit Phone clicked
+                    pd.setMessage("Updating Residential Hall");
+                    showNamePhoneUpdateDialog("hall");
                 }
             }
         });

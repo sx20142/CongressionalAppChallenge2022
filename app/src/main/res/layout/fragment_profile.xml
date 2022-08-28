@@ -1,109 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#F1EDED"
+    android:orientation="vertical"
     tools:context=".ProfileFragment">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/avatarIv"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@color/light_gray"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_camera" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+<!--    <android.support.v7.widget.CardView-->
+<!--        android:layout_width="80dp"-->
+<!--        android:layout_height="80dp"-->
+<!--        android:elevation="12dp"-->
+<!--        android:id="@+id/view2"-->
+<!--        app:cardCornerRadius="40dp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:innerRadius="0dp"-->
+<!--        android:shape="ring"-->
+<!--        android:thicknessRatio="1.9">-->
+<!--        <ImageView-->
+<!--            android:id="@+id/avatarIv"-->
+<!--            android:layout_height="80dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:src="@drawable/ic_person"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:gravity="center"-->
+<!--            android:background="@color/light_gray"/>-->
+<!--    </android.support.v7.widget.CardView>-->
 
-                <!--Cover Photo-->
+    <TextView
+        android:id="@+id/nameTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="Name"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:textSize="25sp" />
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:background="@color/purple_700">
+    <TextView
+        android:id="@+id/emailTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:gravity="center"
+        android:textColor="@color/black" />
 
-                </ImageView>
+    <TextView
+        android:id="@+id/phoneTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Phone"
+        android:gravity="center"
+        android:textColor="@color/black" />
 
-                <LinearLayout
-                    android:id="@+id/linearLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:layout_marginTop="100dp"
-                    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/schoolTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="School"
+        android:gravity="center"
+        android:textColor="@color/black" />
 
-                    <ImageView
-                        android:id="@+id/avatarIv"
-                        android:layout_marginStart="20dp"
-                        android:background="@color/purple_500"
-                        android:padding="5dp"
-                        android:src="@drawable/ic_camera"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:scaleType="centerCrop"
-                        android:layout_marginLeft="20dp"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#77000000"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id = "@+id/nameTv"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart = "5dp"
-                            android:layout_marginTop = "5dp"
-                            android:textSize = "25sp"
-                            android:textColor = "@color/white"
-                            android:layout_marginLeft="5dp"/>
-
-                        <TextView
-                            android:id = "@+id/emailTv"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart = "5dp"
-                            android:textColor = "@color/white"
-                            android:layout_marginLeft="5dp"/>
-
-                        <TextView
-                            android:id = "@+id/phoneTv"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart = "5dp"
-                            android:textColor = "@color/white"
-                            android:layout_marginLeft="5dp"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-                <!--RecyclerView: User specific posts-->
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview_posts"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/linearLayout" />
-
-            </RelativeLayout>
-
-        </ScrollView>
+    <TextView
+        android:id="@+id/hallTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Residential Hall"
+        android:gravity="center"
+        android:textColor="@color/black" />
 
         <!--Floating Action button-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="325dp"
+        android:layout_marginTop="350dp"
         android:src="@drawable/ic_editpen"
-        app:backgroundTint="#D3FF5722" />
+        app:backgroundTint="@color/orange_yellow" />
 
-    </RelativeLayout>
+</LinearLayout>

@@ -3,11 +3,13 @@ package com.example.shareme;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuProvider;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -29,7 +31,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         //Actionbar and its title
         actionBar = getSupportActionBar();
-        actionBar.setTitle("Profile");
+        actionBar.setTitle("Home");
 
         //initialize variables
         firebaseAuth = FirebaseAuth.getInstance();

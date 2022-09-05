@@ -1,6 +1,7 @@
 package com.example.shareme;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,8 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -49,9 +52,8 @@ public class LendPostActivity extends AppCompatActivity {
 
     //declare variables
     FirebaseAuth firebaseAuth;
+    DatabaseReference userDbRef;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference userDBref;
-    DataSnapshot dataSnapshot;
     ActionBar actionBar;
     EditText item_name, extra_info;
     ImageView image;
@@ -60,13 +62,12 @@ public class LendPostActivity extends AppCompatActivity {
     private static final int STORAGE_REQUEST = 200;
     String[] cameraPermission;
     String[] storagePermission;
-    private static final int IMAGEPICK_GALLERY_REQUEST = 300;
-    private static final int IMAGE_PICKCAMERA_REQUEST = 400;
+    private static final int IMAGE_PICK_GALLERY_REQUEST = 300;
+    private static final int IMAGE_PICK_CAMERA_REQUEST = 400;
     ProgressDialog pd;
     Spinner category, duration;
-    String editTitle, editDes;
     String name, email, uid, dp;
-    Button Add_post;
+    Button add_post;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,38 +76,40 @@ public class LendPostActivity extends AppCompatActivity {
 
         //initializing variables
         firebaseAuth = FirebaseAuth.getInstance();
+        //checkUserStatus();
         firebaseDatabase = FirebaseDatabase.getInstance();
         actionBar = getSupportActionBar();
 
         item_name = findViewById(R.id.item_name);
         extra_info = findViewById(R.id.extra_info);
-        Add_post = findViewById(R.id.upload);
+        add_post = findViewById(R.id.upload);
         image = findViewById(R.id.image);
         pd = new ProgressDialog(this);
         pd.setCanceledOnTouchOutside(false);
+        actionBar = getSupportActionBar();
+        actionBar.setTitle("Add New Item To Lend");
+        actionBar.setSubtitle(email);
 
         //enable back button in actionbar
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         //get info on current user
-        userDBref = firebaseDatabase.getReference("Users");
-        Query query = userDBref.orderByChild("email").equalTo(email);
+        userDbRef = firebaseDatabase.getReference("Users");
+        Query query = userDbRef.orderByChild("email").equalTo(email);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds: dataSnapshot.getChildren())
+                for (DataSnapshot ds: snapshot.getChildren())
                 {
                     name = ""+ds.child("name").getValue();
                     email = ""+ds.child("email").getValue();
-                    dp = ""+ds.child("image").getValue();
+                    //dp = ""+ds.child("image").getValue();
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
 
         // category dropdown menu
@@ -136,11 +139,11 @@ public class LendPostActivity extends AppCompatActivity {
         });
 
         // Now we will add the post
-        Add_post.setOnClickListener(new View.OnClickListener() {
+        add_post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = "" + item_name.getText().toString().trim();
-                String description = "" + extra_info.getText().toString().trim();
+                String title = item_name.getText().toString().trim();
+                String description = extra_info.getText().toString().trim();
 
                 // If empty set error
                 if (TextUtils.isEmpty(title)) {
@@ -157,30 +160,27 @@ public class LendPostActivity extends AppCompatActivity {
                 }
 
                 //if image is empty
-                if(imageUri == null)
+                if (imageUri == null) {
                     //post without image
-                    uploadData(editTitle, editDes,"noImage");
-
-                else{
+                    uploadData(title, description,"noImage");
+                }
+                else {
                     //post with image
-                    uploadData(editTitle,editDes,String.valueOf(imageUri));
+                    uploadData(title, description, String.valueOf(imageUri));
                 }
             }
         });
     }
 
-    private void uploadData(String title, String description, String img)
-    {
+    private void uploadData(String title, String description, String img) {
         pd.setMessage("Publishing Post");
         pd.show();
 
         //for post-image name, post-id, post-publish-time
         String timeStamp = String.valueOf(System.currentTimeMillis());
+        String filePathAndName = "Lend_Posts/" + "post_" + timeStamp;
 
-        String filePathAndName = "Posts/" + "post_" + timeStamp;
-
-        if(!img.equals("noImage"))
-        {
+        if(!img.equals("noImage")) {
             //post with image
             StorageReference ref = FirebaseStorage.getInstance().getReference().child(filePathAndName);
             ref.putFile(Uri.parse(img))
@@ -189,28 +189,29 @@ public class LendPostActivity extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             //image is uploaded to firebase storage, now get it's url
                             Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                            while (!uriTask.isSuccessful()) ;
-
+                            while (!uriTask.isSuccessful());
+                            //String downloadUri = uriTask.getResult().toString();
                             String downloadUri = uriTask.getResult().toString();
 
                             if (uriTask.isSuccessful()) {
                                 //url is recieved upload post to firebase database
-                                HashMap<Object, String> hashMap = new HashMap<Object, String>();
+                                HashMap<Object, String> lendPost_hashMap = new HashMap<>();
                                 //put post info
-                                hashMap.put("uid", uid);
-                                hashMap.put("uMane", name);
-                                hashMap.put("uEmail", email);
-                                hashMap.put("uDp", dp);
-                                hashMap.put("pId", timeStamp);
-                                hashMap.put("pTitle", title);
-                                hashMap.put("pDescr", description);
-                                hashMap.put("pImage", downloadUri);
-                                hashMap.put("pTime", timeStamp);
+                                lendPost_hashMap.put("uid", uid);
+                                lendPost_hashMap.put("uName", name);
+                                lendPost_hashMap.put("uEmail", email);
+                                lendPost_hashMap.put("uDp", dp);
+                                lendPost_hashMap.put("pId", timeStamp);
+                                lendPost_hashMap.put("pTitle", title);
+                                lendPost_hashMap.put("pDescr", description);
+                                lendPost_hashMap.put("pImage", downloadUri);
+                                lendPost_hashMap.put("pTime", timeStamp);
 
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 //path to store post data
-                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+                                DatabaseReference data_ref = database.getReference("Lend_Posts");
                                 //put data in ref
-                                ref.child(timeStamp).setValue(hashMap)
+                                data_ref.child(email).setValue(lendPost_hashMap)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
@@ -221,7 +222,7 @@ public class LendPostActivity extends AppCompatActivity {
                                                 item_name.setText("");
                                                 extra_info.setText("");
                                                 image.setImageURI(null);
-                                                imageUri= null;
+                                                imageUri = null;
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
@@ -245,23 +246,23 @@ public class LendPostActivity extends AppCompatActivity {
                         }
                     });
         }
-        else{
-            HashMap<Object, String> hashMap = new HashMap<Object, String>();
+        else {
+            HashMap<Object, String> lendPost_hashMap = new HashMap<>();
             //put post info
-            hashMap.put("uid", uid);
-            hashMap.put("uMane", name);
-            hashMap.put("uEmail", email);
-            hashMap.put("uDp", dp);
-            hashMap.put("pId", timeStamp);
-            hashMap.put("pTitle", title);
-            hashMap.put("pDescr", description);
-            hashMap.put("pImage", "noImage");
-            hashMap.put("pTime", timeStamp);
+            lendPost_hashMap.put("uid", uid);
+            lendPost_hashMap.put("uName", name);
+            lendPost_hashMap.put("uEmail", email);
+            lendPost_hashMap.put("uDp", dp);
+            lendPost_hashMap.put("pId", timeStamp);
+            lendPost_hashMap.put("pTitle", title);
+            lendPost_hashMap.put("pDescr", description);
+            lendPost_hashMap.put("pTime", timeStamp);
 
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
             //path to store post data
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+            DatabaseReference data_ref = database.getReference("Lend_Posts");
             //put data in ref
-            ref.child(timeStamp).setValue(hashMap)
+            data_ref.child(timeStamp).setValue(lendPost_hashMap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -315,46 +316,17 @@ public class LendPostActivity extends AppCompatActivity {
         builder.create().show();
     }
 
-    // check for storage permission
-    private Boolean checkStoragePermission() {
-        boolean result = ContextCompat.checkSelfPermission(LendPostActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                == (PackageManager.PERMISSION_GRANTED);
-        return result;
+    // check camera permission to click picture using camera
+    private Boolean checkCameraPermission() {
+        boolean result = ContextCompat.checkSelfPermission(LendPostActivity.this, Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
+        boolean result1 = ContextCompat.checkSelfPermission(LendPostActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
+        return result && result1;
     }
 
-    // if not given then request for permission after that check if request is given or not
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case CAMERA_REQUEST: {
-                if (grantResults.length > 0) {
-                    boolean camera_accepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean writeStorageaccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-
-                    // if request access given the pick data
-                    if (camera_accepted && writeStorageaccepted) {
-                        pickFromCamera();
-                    } else {
-                        Toast.makeText(LendPostActivity.this, "Please Enable Camera and Storage Permissions", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-            // function end
-            break;
-            case STORAGE_REQUEST: {
-                if (grantResults.length > 0) {
-                    boolean writeStorageaccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-
-                    // if request access given the pick data
-                    if (writeStorageaccepted) {
-                        pickFromGallery();
-                    } else {
-                        Toast.makeText(LendPostActivity.this, "Please Enable Storage Permissions", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-            break;
-        }
+    // request for permission to click photo using camera in app
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void requestCameraPermission() {
+        requestPermissions(cameraPermission, CAMERA_REQUEST);
     }
 
     // request for permission to write data into storage
@@ -363,16 +335,11 @@ public class LendPostActivity extends AppCompatActivity {
         requestPermissions(storagePermission, STORAGE_REQUEST);
     }
 
-    // check camera permission to click picture using camera
-    private Boolean checkCameraPermission() {
-        boolean result = ContextCompat.checkSelfPermission(LendPostActivity.this, Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
-        boolean result1 = ContextCompat.checkSelfPermission(LendPostActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
-        return result && result1;
-    }
-    // request for permission to click photo using camera in app
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private void requestCameraPermission() {
-        requestPermissions(cameraPermission, CAMERA_REQUEST);
+    // check for storage permission
+    private Boolean checkStoragePermission() {
+        boolean result = ContextCompat.checkSelfPermission(LendPostActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                == (PackageManager.PERMISSION_GRANTED);
+        return result;
     }
 
     // if access is given then pick image from camera and then put
@@ -384,21 +351,67 @@ public class LendPostActivity extends AppCompatActivity {
         imageUri = LendPostActivity.this.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
         Intent camerIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         camerIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        startActivityForResult(camerIntent, IMAGE_PICKCAMERA_REQUEST);
+        startActivityForResult(camerIntent, IMAGE_PICK_CAMERA_REQUEST);
     }
 
     // if access is given then pick image from gallery
     private void pickFromGallery() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK);
         galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, IMAGEPICK_GALLERY_REQUEST);
+        startActivityForResult(galleryIntent, IMAGE_PICK_GALLERY_REQUEST);
     }
 
-    private void checkUserStatus()
-    {
+    // if not given then request for permission after that check if request is given or not
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case CAMERA_REQUEST: {
+                if (grantResults.length > 0) {
+                    boolean camera_accepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean writeStorageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+
+                    // if request access given the pick data
+                    if (camera_accepted && writeStorageAccepted) {
+                        pickFromCamera();
+                    } else {
+                        Toast.makeText(LendPostActivity.this, "Please Enable Camera and Storage Permissions", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+            // function end
+            break;
+            case STORAGE_REQUEST: {
+                if (grantResults.length > 0) {
+                    boolean writeStorageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+                    // if request access given the pick data
+                    if (writeStorageAccepted) {
+                        pickFromGallery();
+                    } else {
+                        Toast.makeText(LendPostActivity.this, "Please Enable Storage Permissions", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+            break;
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        checkUserStatus();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkUserStatus();
+    }
+
+    private void checkUserStatus() {
         //get current user
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        if(user!= null){
+        if(user != null){
             //user is signed in stay here
             email = user.getEmail();
             uid = user.getUid();
@@ -408,6 +421,49 @@ public class LendPostActivity extends AppCompatActivity {
             startActivity(new Intent(LendPostActivity.this, MainActivity.class));
             LendPostActivity.this.finish();
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+    }
+
+    //inflate options menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //inflating menu
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //handle menu item clicks
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //get item id
+        int id = item.getItemId();
+        if (id == R.id.logout_action) {
+            firebaseAuth.signOut();
+            checkUserStatus();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //this method will be called after picking image from camera or gallery
+        if (resultCode == RESULT_OK) {
+            if (requestCode == IMAGE_PICK_GALLERY_REQUEST) {
+                //image is picked from gallery, get uri of image
+                imageUri = data.getData();
+                //set to imageview
+                image.setImageURI(imageUri);
+            }
+            else if (requestCode == IMAGE_PICK_CAMERA_REQUEST) {
+                image.setImageURI(imageUri);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

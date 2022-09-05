@@ -42,9 +42,10 @@ public class SecondSignUpActivity extends AppCompatActivity {
     //declare variables
     //Spinner school_spinner;
     EditText school_input;
+    EditText resHall_input;
     ListView school_list;
     ArrayAdapter<String> adapter;
-    String email, password;
+    String email, password, name, phoneNum;
     Button signUp_btn;
     ProgressDialog progressDialog; //progressbar to display while registering user
     private FirebaseAuth mAuth;
@@ -67,8 +68,11 @@ public class SecondSignUpActivity extends AppCompatActivity {
         //school_spinner = findViewById(R.id.school_spinner);
         school_input = findViewById(R.id.school_input);
         school_list = findViewById(R.id.school_list);
+        resHall_input = findViewById(R.id.resHall_input);
         email = intent.getStringExtra("userEmail");
         password = intent.getStringExtra("userPass");
+        name = intent.getStringExtra("userName");
+        phoneNum = intent.getStringExtra("userPhone");
         signUp_btn = findViewById(R.id.signUp_btn);
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
@@ -263,13 +267,17 @@ public class SecondSignUpActivity extends AppCompatActivity {
                             //get user email and uid from auth
                             String email = user.getEmail();
                             String uid = user.getUid();
+                            String school = school_input.getText().toString().trim();
+                            String resHall = resHall_input.getText().toString().trim();
                             //when user is registered, store user info in firebase realtime database using hashmap
                             HashMap<Object, String> userInfo_hash = new HashMap<>();
                             //put info in hashmap
                             userInfo_hash.put("email", email);
                             userInfo_hash.put("uid", uid);
-                            userInfo_hash.put("name", "");
-                            userInfo_hash.put("phone", "");
+                            userInfo_hash.put("name", name);
+                            userInfo_hash.put("phone", phoneNum);
+                            userInfo_hash.put("school", school);
+                            userInfo_hash.put("resHall", resHall);
                             userInfo_hash.put("image", "");
                             //firebase database instance
                             FirebaseDatabase database = FirebaseDatabase.getInstance();

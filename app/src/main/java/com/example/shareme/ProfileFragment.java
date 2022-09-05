@@ -153,16 +153,12 @@ public class ProfileFragment<ModelPost> extends Fragment {
                     }
                     catch(Exception e){
                         Picasso.get().load(R.drawable.ic_person).into(avatarIv);
-
                     }
-
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
 
         //fab button click
@@ -172,11 +168,8 @@ public class ProfileFragment<ModelPost> extends Fragment {
                 showEditProfileDialog();
             }
         });
-
         postList = new ArrayList<>();
-
         checkUserStatus();
-
         return view;
     }
 
@@ -194,15 +187,12 @@ public class ProfileFragment<ModelPost> extends Fragment {
         requestPermissions(storagePermissions, STORAGE_REQUEST_CODE);
     }
 
-
-
     private boolean checkCameraPermission() {
         //check if storage permission is enabled or not
         //return true if enabled
         //return false if not enabled
         boolean result = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
                 == (PackageManager.PERMISSION_GRANTED);
-
         boolean result1 = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 == (PackageManager.PERMISSION_GRANTED);
         return result && result1;
@@ -313,11 +303,8 @@ public class ProfileFragment<ModelPost> extends Fragment {
                                     dataSnapshot.getRef().child(child).child("uName").setValue(value);
                                 }
                             }
-
                             @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
+                            public void onCancelled(@NonNull DatabaseError databaseError) {}
                         });
 
                         //update name in current users comments on posts
@@ -337,24 +324,16 @@ public class ProfileFragment<ModelPost> extends Fragment {
                                                     dataSnapshot.getRef().child(child).child("uName").setValue(value);
                                                 }
                                             }
-
                                             @Override
-                                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                            }
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {}
                                         });
                                     }
                                 }
                             }
-
                             @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
+                            public void onCancelled(@NonNull DatabaseError databaseError) {}
                         });
                     }
-
-
                 }
                 else {
                     Toast.makeText(getActivity(), "Please enter "+key, Toast.LENGTH_SHORT).show();
@@ -543,9 +522,7 @@ public class ProfileFragment<ModelPost> extends Fragment {
                                     }
 
                                     @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {}
                                 });
 
                                 //update user image in current users comments on posts
@@ -567,18 +544,13 @@ public class ProfileFragment<ModelPost> extends Fragment {
                                                     }
 
                                                     @Override
-                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                    }
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {}
                                                 });
                                             }
                                         }
                                     }
-
                                     @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {}
                                 });
                             }
 
@@ -597,8 +569,6 @@ public class ProfileFragment<ModelPost> extends Fragment {
                         Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
     }
 
     private void pickFromCamera() {
@@ -643,6 +613,4 @@ public class ProfileFragment<ModelPost> extends Fragment {
         setHasOptionsMenu(true);//to show menu option in fragment
         super.onCreate(savedInstanceState);
     }
-
-
 }

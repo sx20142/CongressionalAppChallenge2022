@@ -90,6 +90,8 @@ public class FirstSignUpActivity extends AppCompatActivity {
                     Intent intent = new Intent(FirstSignUpActivity.this, SecondSignUpActivity.class);
                     intent.putExtra("userEmail", email_input.getText().toString().trim());
                     intent.putExtra("userPass", password_input.getText().toString().trim());
+                    intent.putExtra("userName", name_input.getText().toString().trim());
+                    intent.putExtra("userPhone", phoneNum_input.getText().toString().trim());
                     startActivity(intent);
                 }
             }

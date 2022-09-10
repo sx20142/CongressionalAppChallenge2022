@@ -72,7 +72,7 @@ public class ProfileFragment<ModelPost> extends Fragment {
 
     //view from xml
     ImageView avatarIv;
-    TextView nameTv, emailTv, phoneTv, schoolTv, hallTv;
+    TextView nameTv, emailTv, phoneTv, schoolTv, resHallTv;
     FloatingActionButton fab;
     RecyclerView postsRecyclerView;
 
@@ -125,7 +125,7 @@ public class ProfileFragment<ModelPost> extends Fragment {
         emailTv=view.findViewById(R.id.emailTv);
         phoneTv=view.findViewById(R.id.phoneTv);
         schoolTv=view.findViewById(R.id.schoolTv);
-        hallTv=view.findViewById(R.id.hallTv);
+        resHallTv=view.findViewById(R.id.resHallTv);
         fab = view.findViewById(R.id.fab);
 //        postsRecyclerView = view.findViewById(R.id.recyclerview_posts);
 
@@ -138,25 +138,24 @@ public class ProfileFragment<ModelPost> extends Fragment {
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
 
                 //check until required data get
-                for(DataSnapshot ds: datasnapshot.getChildren()){
+                for (DataSnapshot ds: datasnapshot.getChildren()) {
                     //get data
                     String name = ""+ds.child("name").getValue();
                     String email = ""+ds.child("email").getValue();
                     String phone = ""+ds.child("phone").getValue();
                     String image = ""+ds.child("image").getValue();
                     String school = ""+ds.child("school").getValue();
-                    String hall = ""+ds.child("hall").getValue();
+                    String resHall = ""+ds.child("resHall").getValue();
 
                     //set data
                     nameTv.setText(name);
                     emailTv.setText(email);
                     phoneTv.setText(phone);
                     schoolTv.setText(school);
-                    hallTv.setText(hall);
+                    resHallTv.setText(resHall);
 
-                    try{
+                    try {
                         Picasso.get().load(image).into(avatarIv);
-
                     }
                     catch(Exception e){
                         Picasso.get().load(R.drawable.ic_person).into(avatarIv);
@@ -250,7 +249,7 @@ public class ProfileFragment<ModelPost> extends Fragment {
                 else if (which == 4) {
                     //Edit Phone clicked
                     pd.setMessage("Updating Residential Hall");
-                    showNamePhoneUpdateDialog("hall");
+                    showNamePhoneUpdateDialog("resHall");
                 }
             }
         });

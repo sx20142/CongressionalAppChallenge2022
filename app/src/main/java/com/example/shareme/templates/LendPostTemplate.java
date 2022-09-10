@@ -1,14 +1,16 @@
 package com.example.shareme.templates;
 
-public class PostTemplate {
-    String pId, pTitle, pDescr, pImage, pTime, uid, uEmail, uName;
+public class LendPostTemplate {
+    String pId, pCategory, pDuration, pTitle, pDescr, pImage, pTime, uid, uEmail, uName;
     //uDp
 
-    public PostTemplate() {
+    public LendPostTemplate() {
     }
 
-    public PostTemplate(String pId, String pTitle, String pDescr, String pImage, String pTime, String uid, String uEmail, String uName) { //String uDp
+    public LendPostTemplate(String pId, String pCategory, String pDuration, String pTitle, String pDescr, String pImage, String pTime, String uid, String uEmail, String uName) { //String uDp
         this.pId = pId;
+        this.pCategory = pCategory;
+        this.pDuration = pDuration;
         this.pTitle = pTitle;
         this.pDescr = pDescr;
         this.pImage = pImage;
@@ -25,6 +27,22 @@ public class PostTemplate {
 
     public void setpId(String pId) {
         this.pId = pId;
+    }
+
+    public String getpCategory() {
+        return pCategory;
+    }
+
+    public void setpCategory(String pCategory) {
+        this.pCategory = pCategory;
+    }
+
+    public String getpDuration() {
+        return pDuration;
+    }
+
+    public void setpDuration(String pDuration) {
+        this.pDuration = pDuration;
     }
 
     public String getpTitle() {

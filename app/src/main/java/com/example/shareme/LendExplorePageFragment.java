@@ -20,15 +20,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.shareme.adapters.PostAdapter;
-import com.example.shareme.templates.PostTemplate;
+import com.example.shareme.adapters.LendPostAdapter;
+import com.example.shareme.templates.LendPostTemplate;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -39,8 +38,8 @@ public class LendExplorePageFragment extends Fragment {
     //declare variables
     FirebaseAuth firebaseAuth;
     RecyclerView recyclerView;
-    List<PostTemplate> postList;
-    PostAdapter postAdapter;
+    List<LendPostTemplate> postList;
+    LendPostAdapter postAdapter;
 
     public LendExplorePageFragment() {
         // Required empty public constructor
@@ -78,10 +77,11 @@ public class LendExplorePageFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 postList.clear();
                 for (DataSnapshot ds: snapshot.getChildren()){
-                    PostTemplate postTemplate = ds.getValue(PostTemplate.class);
+                    LendPostTemplate postTemplate = ds.getValue(LendPostTemplate.class);
+
                     postList.add(postTemplate);
                     //adapter
-                    postAdapter = new PostAdapter(getActivity(), postList);
+                    postAdapter = new LendPostAdapter(getActivity(), postList);
                     //set adapter to recyclerview
                     recyclerView.setAdapter(postAdapter);
                 }
@@ -104,7 +104,7 @@ public class LendExplorePageFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 postList.clear();
                 for (DataSnapshot ds: snapshot.getChildren()){
-                    PostTemplate postTemplate = ds.getValue(PostTemplate.class);
+                    LendPostTemplate postTemplate = ds.getValue(LendPostTemplate.class);
 
 
                     if (postTemplate.getpTitle().toLowerCase().contains(searchQuery.toLowerCase()) ||
@@ -113,7 +113,7 @@ public class LendExplorePageFragment extends Fragment {
                     }
 
                     //adapter
-                    postAdapter = new PostAdapter(getActivity(), postList);
+                    postAdapter = new LendPostAdapter(getActivity(), postList);
                     //set adapter to recyclerview
                     recyclerView.setAdapter(postAdapter);
                 }
@@ -150,8 +150,6 @@ public class LendExplorePageFragment extends Fragment {
     //inflate options menu
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        //inflating menu
-        inflater.inflate(R.menu.menu_main, menu);
         //searchview to search posts by post title/description
         MenuItem item = menu.findItem(R.id.search_action);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);

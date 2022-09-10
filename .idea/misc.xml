@@ -3,13 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/drawable/rectangle.xml" value="0.323" />
-        <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/layout/activity_first_sign_up.xml" value="0.2536231884057971" />
         <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/layout/fragment_profile.xml" value="0.291213768115942" />
-        <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/layout/rectangle.xml" value="0.2536231884057971" />
-        <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/layout/row_posts.xml" value="0.15577507598784193" />
-        <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/menu/menu_main.xml" value="0.3203125" />
         <entry key="..\:/Users/madis/AndroidStudioProjects/CongressionalAppChallenge2022/app/src/main/res/layout/activity_lend_post.xml" value="0.152" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1675" />
+        <entry key="app/src/main/res/layout/activity_home_screen.xml" value="0.1461499493414387" />
+        <entry key="app/src/main/res/layout/activity_lend_post.xml" value="0.14402173913043478" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_lend_explore_page.xml" value="0.13518518518518519" />
+        <entry key="app/src/main/res/layout/row_posts.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.184375" />
       </map>
     </option>
   </component>

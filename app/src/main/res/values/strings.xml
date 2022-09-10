@@ -29,10 +29,10 @@
 
     <string-array name="item_duration">
         <item>duration</item>
-    <item>a few hours</item>
-    <item>one day</item>
-    <item>a couple days</item>
-    <item>a week</item>
-</string-array>
+        <item>a few hours</item>
+        <item>one day</item>
+        <item>a couple days</item>
+        <item>a week</item>
+    </string-array>
 
 </resources>

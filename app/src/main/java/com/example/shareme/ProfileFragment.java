@@ -145,14 +145,14 @@ public class ProfileFragment<ModelPost> extends Fragment {
                     String phone = ""+ds.child("phone").getValue();
                     String image = ""+ds.child("image").getValue();
                     String school = ""+ds.child("school").getValue();
-                    String hall = ""+ds.child("hall").getValue();
+                    String resHall = ""+ds.child("resHall").getValue();
 
                     //set data
                     nameTv.setText(name);
                     emailTv.setText(email);
                     phoneTv.setText(phone);
                     schoolTv.setText(school);
-                    hallTv.setText(hall);
+                    hallTv.setText(resHall);
 
                     try{
                         Picasso.get().load(image).into(avatarIv);
@@ -214,7 +214,8 @@ public class ProfileFragment<ModelPost> extends Fragment {
         /*Show dialog containing options
          * 1) Edit Profile Picture
          * 3) Edit Name
-         * 4) Edit Phone*/
+         * 4) Edit Phone
+         * 5?) Edit Notifications (Stephanie added)*/
 
         //options to show in dialog
         String options[] = {"Edit Profile Picture", "Edit Name", "Edit Phone", "Edit School", "Edit Residential Hall"};

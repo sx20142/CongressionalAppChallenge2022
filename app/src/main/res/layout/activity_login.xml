@@ -23,11 +23,11 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
+        android:fontFamily="@font/hero_regular"
         android:text="Hello!"
         android:textColor="#FFB900"
         android:textSize="55dp"
-        android:textStyle="bold"
-        android:fontFamily="@font/hero_regular"/>
+        android:textStyle="bold" />
 
     <!--welcome back text-->
     <TextView
@@ -38,7 +38,8 @@
         android:layout_marginTop="195dp"
         android:text="WELCOME BACK"
         android:textColor="#FFB900"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:fontFamily="@font/hero_regular"/>
 
     <!--email input-->
     <com.google.android.material.textfield.TextInputLayout
@@ -92,7 +93,8 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="25sp"
-        app:backgroundTint="#FFB900" />
+        app:backgroundTint="#FFB900"
+        app:cornerRadius="50dp" />
 
     <TextView
         android:id="@+id/noAccount_txt"

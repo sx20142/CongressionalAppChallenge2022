@@ -5,6 +5,21 @@
       <map>
         <entry key="..\:/Users/19402/CongressionalAppChallenge2022/app/src/main/res/layout/fragment_profile.xml" value="0.291213768115942" />
         <entry key="..\:/Users/madis/AndroidStudioProjects/CongressionalAppChallenge2022/app/src/main/res/layout/activity_lend_post.xml" value="0.152" />
+        <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/CongressionalAppChallenge2022/app/src/main/res/layout/activity_borrow_post.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/CongressionalAppChallenge2022/app/src/main/res/layout/activity_dashboard.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/CongressionalAppChallenge2022/app/src/main/res/layout/activity_first_sign_up.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/CongressionalAppChallenge2022/app/src/main/res/layout/activity_home_screen.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/CongressionalAppChallenge2022/app/src/main/res/layout/activity_lend_post.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/CongressionalAppChallenge2022/app/src/main/res/layout/activity_login.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/CongressionalAppChallenge2022/app/src/main/res/layout/activity_main.xml" value="0.11347517730496454" />
+        <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/CongressionalAppChallenge2022/app/src/main/res/layout/activity_second_sign_up.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/CongressionalAppChallenge2022/app/src/main/res/layout/activity_splash_screen.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/CongressionalAppChallenge2022/app/src/main/res/layout/fragment_add_post.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/CongressionalAppChallenge2022/app/src/main/res/layout/fragment_lend_explore_page.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/CongressionalAppChallenge2022/app/src/main/res/layout/fragment_notifications.xml" value="0.3625" />
+        <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/CongressionalAppChallenge2022/app/src/main/res/layout/fragment_profile.xml" value="0.24739583333333334" />
+        <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/CongressionalAppChallenge2022/app/src/main/res/layout/fragment_search_page.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/sx201/AndroidStudioProjects/ShareME/CongressionalAppChallenge2022/app/src/main/res/layout/row_posts.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1675" />
         <entry key="app/src/main/res/layout/activity_home_screen.xml" value="0.1461499493414387" />
         <entry key="app/src/main/res/layout/activity_lend_post.xml" value="0.14402173913043478" />

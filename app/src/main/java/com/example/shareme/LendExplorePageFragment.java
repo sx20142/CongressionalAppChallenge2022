@@ -189,6 +189,9 @@ public class LendExplorePageFragment extends Fragment {
             firebaseAuth.signOut();
             checkUserStatus();
         }
+       // else if (R.id.action_settings) {
+
+        //}
         return super.onOptionsItemSelected(item);
     }
 }

@@ -72,7 +72,7 @@
         android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/hallTv"
+        android:id="@+id/resHallTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Residential Hall"

@@ -15,21 +15,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shareme.R;
-import com.example.shareme.templates.PostTemplate;
-import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
+import com.example.shareme.templates.LendPostTemplate;
 
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHolder> {
+public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHolder> {
 
     Context context;
-    List<PostTemplate> postList;
+    List<LendPostTemplate> postList;
 
-    public PostAdapter(Context context, List<PostTemplate> postList) {
+    public LendPostAdapter(Context context, List<LendPostTemplate> postList) {
         this.context = context;
         this.postList = postList;
     }
@@ -49,6 +46,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHolder> {
         String uName = postList.get(position).getuName();
         //String uDp = postList.get(position).getuDp();
         String pId = postList.get(position).getpId();
+        String pCategory = postList.get(position).getpCategory();
+        String pDuration = postList.get(position).getpDuration();
         String pTitle = postList.get(position).getpTitle();
         String pDescription = postList.get(position).getpDescr();
         String pImage = postList.get(position).getpImage();
@@ -63,7 +62,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHolder> {
         holder.username_txt.setText(uName);
         holder.postTime_txt.setText(pTimestamp);
         holder.postTitle_txt.setText(pTitle);
-        holder.postDescription_txt.setText(pDescription);
+        holder.postDescription_txt.setText("Description: " + pDescription);
+        holder.postCategory_txt.setText("Category: " + pCategory);
+        holder.postDuration_txt.setText("Duration: " + pDuration);
 
         //set user dp
         /*try {
@@ -85,18 +86,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHolder> {
         }*/
 
         //handle button clicks
-        holder.more_btn.setOnClickListener(new View.OnClickListener() {
+        holder.lend_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //will implement later
-                Toast.makeText(context, "More", Toast.LENGTH_SHORT).show();
-            }
-        });
-        holder.lendBorrow_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //will implement later
-                Toast.makeText(context, "Lend/Borrow", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Lend", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -111,9 +105,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHolder> {
 
         //declare views from row_posts.xml
         ImageView userPfp_image, postImage_image;
-        TextView username_txt, postTime_txt, postTitle_txt, postDescription_txt;
-        ImageButton more_btn;
-        Button lendBorrow_btn;
+        TextView username_txt, postTime_txt, postTitle_txt, postDescription_txt, postCategory_txt, postDuration_txt;
+        Button lend_btn;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
@@ -124,9 +117,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHolder> {
             username_txt = itemView.findViewById(R.id.username_txt);
             postTime_txt = itemView.findViewById(R.id.postTime_txt);
             postTitle_txt = itemView.findViewById(R.id.postTitle_txt);
+            postCategory_txt = itemView.findViewById(R.id.postCategory_txt);
+            postDuration_txt = itemView.findViewById(R.id.postDuration_txt);
             postDescription_txt = itemView.findViewById(R.id.postDescription_txt);
-            more_btn = itemView.findViewById(R.id.more_btn);
-            lendBorrow_btn = itemView.findViewById(R.id.lendBorrow_btn);
+            lend_btn = itemView.findViewById(R.id.lend_btn);
 
         }
     }

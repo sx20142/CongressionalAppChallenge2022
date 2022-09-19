@@ -280,6 +280,7 @@ public class LendPostActivity extends AppCompatActivity {
             lendPost_hashMap.put("pDuration", durationSelected);
             lendPost_hashMap.put("pTitle", title);
             lendPost_hashMap.put("pDescr", description);
+            lendPost_hashMap.put("pImage", "null");
             lendPost_hashMap.put("pTime", timeStamp);
 
             FirebaseDatabase database = FirebaseDatabase.getInstance();

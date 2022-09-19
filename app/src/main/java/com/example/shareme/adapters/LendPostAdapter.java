@@ -6,16 +6,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shareme.R;
 import com.example.shareme.templates.LendPostTemplate;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 import java.util.List;
@@ -25,6 +34,14 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
 
     Context context;
     List<LendPostTemplate> postList;
+    AlertDialog.Builder dialogBuilder;
+    AlertDialog dialog;
+    View user_view;
+
+    FirebaseAuth firebaseAuth;
+    FirebaseUser user;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     public LendPostAdapter(Context context, List<LendPostTemplate> postList) {
         this.context = context;
@@ -34,7 +51,7 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.row_posts, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.lend_row_posts, parent, false);
         return new MyHolder(view);
     }
 
@@ -93,6 +110,83 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
                 Toast.makeText(context, "Lend", Toast.LENGTH_SHORT).show();
             }
         });
+
+        //show user profile
+        dialogBuilder = new AlertDialog.Builder(context);
+        user_view = LayoutInflater.from(context).inflate(R.layout.user_profile, null);
+        dialogBuilder.setView(user_view);
+        dialog = dialogBuilder.create();
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Users");
+        String username = holder.username_txt.getText().toString();
+        Query query = databaseReference.orderByChild("name").equalTo(username);
+        query.addValueEventListener(new ValueEventListener() {
+            TextView user_name = user_view.findViewById(R.id.nameTv);
+            TextView user_email = user_view.findViewById(R.id.emailTv);
+            TextView user_phone = user_view.findViewById(R.id.phoneTv);
+            TextView user_school = user_view.findViewById(R.id.schoolTv);
+            TextView user_resHall = user_view.findViewById(R.id.resHallTv);
+            ImageView user_avatar = user_view.findViewById(R.id.avatarIv);
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                //check until required data get
+                for (DataSnapshot ds: datasnapshot.getChildren()) {
+                    //get data
+                    String name = ""+ds.child("name").getValue();
+                    String email = ""+ds.child("email").getValue();
+                    String phone = ""+ds.child("phone").getValue();
+                    String image = ""+ds.child("image").getValue();
+                    String school = ""+ds.child("school").getValue();
+                    String resHall = ""+ds.child("resHall").getValue();
+
+                    //set data
+                    user_name.setText(name);
+                    user_email.setText(email);
+                    user_phone.setText(phone);
+                    user_school.setText(school);
+                    user_resHall.setText(resHall);
+
+
+                    try {
+                        Picasso.get().load(image).into(user_avatar);
+                    }
+                    catch(Exception e){
+                        Picasso.get().load(R.drawable.ic_person).into(user_avatar);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
+        holder.userPfp_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.show();
+            }
+        });
+
+        //hide image box
+        Query query2 = databaseReference.orderByChild("pImage").equalTo("null");
+        query2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                //check until required data get
+                for (DataSnapshot ds: datasnapshot.getChildren()) {
+                    //get data
+                    String image = ""+ds.child("pImage").getValue();
+
+                    //set data
+                    if (image == "null")
+                        holder.postImage_image.setVisibility(View.INVISIBLE);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
+
+
     }
 
     @Override

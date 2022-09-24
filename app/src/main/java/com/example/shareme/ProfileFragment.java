@@ -213,17 +213,17 @@ public class ProfileFragment<ModelPost> extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 //edit switch status
                 editor = sp.edit();
-                editor.putBoolean(""+TOPIC_POST_NOTIFICATION, isChecked);
+            //    editor.putBoolean(""+TOPIC_POST_NOTIFICATION, isChecked);
                 editor.apply();
 
-                if(isChecked) {
-                    subscribePostNotification(); //call to subscribe
-                }
-                else{
-                    unsubscribePostNotification(); //call to unsubscribe
-                }
+            //    if(isChecked) {
+             //       subscribePostNotification(); //call to subscribe
+            //    }
+            //    else{
+            //        unsubscribePostNotification(); //call to unsubscribe
             }
-        });
+            }
+        ;});
 
     }
 

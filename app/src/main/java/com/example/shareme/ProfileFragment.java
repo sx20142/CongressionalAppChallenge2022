@@ -211,7 +211,7 @@ public class ProfileFragment<ModelPost> extends Fragment {
         notificationsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                //edit switch status
+                //edit switch status pls just let me commit
                 editor = sp.edit();
                 editor.putBoolean(""+TOPIC_POST_NOTIFICATION, isChecked);
                 editor.apply();

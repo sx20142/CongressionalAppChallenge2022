@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ProfileFragment">
-
+    
     <ImageView
         android:id="@+id/avatarIv"
         android:layout_width="120dp"
@@ -79,6 +79,20 @@
         android:gravity="center"
         android:textColor="@color/black" />
 
+
+    //option to switch on/off notifications
+    <androidx.cardview.widget.CardView
+        android:id="@+id/notificationsSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="10dp"
+        android:layout_gravity="center">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notifications" />
+
         <!--Floating Action button-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -89,4 +103,8 @@
         android:src="@drawable/ic_editpen"
         app:backgroundTint="@color/orange_yellow" />
 
+
+
+    </androidx.cardview.widget.CardView>
+    
 </LinearLayout>

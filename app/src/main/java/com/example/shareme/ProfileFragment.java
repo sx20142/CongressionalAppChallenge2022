@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.provider.MediaStore;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.core.content.ContextCompat;
@@ -27,6 +30,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,6 +57,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 import static com.google.firebase.storage.FirebaseStorage.getInstance;
 
 import java.io.ObjectInputStream;
@@ -102,9 +107,20 @@ public class ProfileFragment<ModelPost> extends Fragment {
         // Required empty public constructor
     }
 
+    //init view for notifications switch
+    SwitchCompat notificationsSwitch;
+
+    //use shared preferences to save the state of the swtich
+    SharedPreferences sp;
+    SharedPreferences.Editor editor; //to edit the shared preferences
+
+    //constant for topic
+    private static final String TOPIC_POST_NOTIFICATION = "POST";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
@@ -127,7 +143,20 @@ public class ProfileFragment<ModelPost> extends Fragment {
         schoolTv=view.findViewById(R.id.schoolTv);
         hallTv=view.findViewById(R.id.hallTv);
         fab = view.findViewById(R.id.fab);
+        notificationsSwitch = view.findViewById(R.id.notificationsSwitch);
 //        postsRecyclerView = view.findViewById(R.id.recyclerview_posts);
+
+        //init system preferences sp
+        sp = requireActivity().getSharedPreferences("Notification_SP", MODE_PRIVATE);
+        boolean isPostEnabled = sp.getBoolean(""+TOPIC_POST_NOTIFICATION, false);
+        //if enabled, check switch, otherwise uncheck swtich - by default unchecked/false
+        if(isPostEnabled){
+            notificationsSwitch.setChecked(true);
+        } else{
+            notificationsSwitch.setChecked(false);
+        }
+
+
 
         //init progress dialog
         pd = new ProgressDialog(getActivity());
@@ -178,7 +207,33 @@ public class ProfileFragment<ModelPost> extends Fragment {
         postList = new ArrayList<>();
         checkUserStatus();
         return view;
+
+        notificationsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                //edit switch status
+                editor = sp.edit();
+                editor.putBoolean(""+TOPIC_POST_NOTIFICATION, isChecked);
+                editor.apply();
+
+                if(isChecked) {
+                    subscribePostNotification(); //call to subscribe
+                }
+                else{
+                    unsubscribePostNotification(); //call to unsubscribe
+                }
+            }
+        });
+
     }
+
+    private void subscribePostNotification() {
+        //11:47 on video
+    }
+
+    //implement switch change listener for notifications switch
+
+
 
     private boolean checkStoragePermission() {
         //check if storage permission is enabled or not

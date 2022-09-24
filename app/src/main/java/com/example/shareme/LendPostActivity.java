@@ -23,6 +23,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,7 +67,8 @@ public class LendPostActivity extends AppCompatActivity {
     private static final int IMAGE_PICK_CAMERA_REQUEST = 400;
     ProgressDialog pd;
     Spinner category, duration;
-    String name, email, uid, dp;
+    ArrayAdapter<String> categoryAdaptor, durationAdaptor;
+    String name, email, uid, dp, categorySelected, durationSelected;
     Button add_post;
 
     @Override
@@ -102,8 +104,8 @@ public class LendPostActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds: snapshot.getChildren())
                 {
-                    name = ""+ds.child("name").getValue();
                     email = ""+ds.child("email").getValue();
+                    name = ""+ds.child("name").getValue();
                     //dp = ""+ds.child("image").getValue();
                 }
             }
@@ -119,12 +121,30 @@ public class LendPostActivity extends AppCompatActivity {
         categoryAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         category.setAdapter(categoryAdaptor);
 
+        category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                categorySelected = category.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
         //duration dropdown menu
         duration = findViewById(R.id.duration);
         ArrayAdapter<String> durationAdaptor = new ArrayAdapter<>(LendPostActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.item_duration));
         durationAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         duration.setAdapter(durationAdaptor);
+
+        duration.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                durationSelected = duration.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
 
         // Initialising camera and storage permission
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -202,6 +222,8 @@ public class LendPostActivity extends AppCompatActivity {
                                 lendPost_hashMap.put("uEmail", email);
                                 lendPost_hashMap.put("uDp", dp);
                                 lendPost_hashMap.put("pId", timeStamp);
+                                lendPost_hashMap.put("pCategory", categorySelected);
+                                lendPost_hashMap.put("pDuration", durationSelected);
                                 lendPost_hashMap.put("pTitle", title);
                                 lendPost_hashMap.put("pDescr", description);
                                 lendPost_hashMap.put("pImage", downloadUri);
@@ -254,8 +276,11 @@ public class LendPostActivity extends AppCompatActivity {
             lendPost_hashMap.put("uEmail", email);
             lendPost_hashMap.put("uDp", dp);
             lendPost_hashMap.put("pId", timeStamp);
+            lendPost_hashMap.put("pCategory", categorySelected);
+            lendPost_hashMap.put("pDuration", durationSelected);
             lendPost_hashMap.put("pTitle", title);
             lendPost_hashMap.put("pDescr", description);
+            lendPost_hashMap.put("pImage", "null");
             lendPost_hashMap.put("pTime", timeStamp);
 
             FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -413,6 +438,7 @@ public class LendPostActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user != null){
             //user is signed in stay here
+            name = user.getDisplayName();
             email = user.getEmail();
             uid = user.getUid();
         }

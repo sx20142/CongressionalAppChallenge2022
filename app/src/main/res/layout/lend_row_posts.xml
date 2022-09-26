@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
-                android:text="LEND/BORROW"/>
+                android:text="LEND"/>
         </LinearLayout>
 
     </LinearLayout>

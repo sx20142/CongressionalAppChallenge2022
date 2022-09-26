@@ -181,7 +181,7 @@ public class ProfileFragment<ModelPost> extends Fragment {
     }
 
     private boolean checkStoragePermission() {
-        //check if storage permission is enabled or not
+        //check if storage permission is enabled or not pls PUSH
         //return true if enabled
         //return false if not enabled
         boolean result = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)

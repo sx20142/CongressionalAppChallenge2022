@@ -112,57 +112,56 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
         });
 
         //show user profile
-        dialogBuilder = new AlertDialog.Builder(context);
-        user_view = LayoutInflater.from(context).inflate(R.layout.user_profile, null);
-        dialogBuilder.setView(user_view);
-        dialog = dialogBuilder.create();
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Users");
-        String username = holder.username_txt.getText().toString();
-        Query query = databaseReference.orderByChild("name").equalTo(username);
-        query.addValueEventListener(new ValueEventListener() {
-            TextView user_name = user_view.findViewById(R.id.nameTv);
-            TextView user_email = user_view.findViewById(R.id.emailTv);
-            TextView user_phone = user_view.findViewById(R.id.phoneTv);
-            TextView user_school = user_view.findViewById(R.id.schoolTv);
-            TextView user_resHall = user_view.findViewById(R.id.resHallTv);
-            ImageView user_avatar = user_view.findViewById(R.id.avatarIv);
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                //check until required data get
-                for (DataSnapshot ds: datasnapshot.getChildren()) {
-                    //get data
-                    String name = ""+ds.child("name").getValue();
-                    String email = ""+ds.child("email").getValue();
-                    String phone = ""+ds.child("phone").getValue();
-                    String image = ""+ds.child("image").getValue();
-                    String school = ""+ds.child("school").getValue();
-                    String resHall = ""+ds.child("resHall").getValue();
-
-                    //set data
-                    user_name.setText(name);
-                    user_email.setText(email);
-                    user_phone.setText(phone);
-                    user_school.setText(school);
-                    user_resHall.setText(resHall);
-
-
-                    try {
-                        Picasso.get().load(image).into(user_avatar);
-                    }
-                    catch(Exception e){
-                        Picasso.get().load(R.drawable.ic_person).into(user_avatar);
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
-        });
         holder.userPfp_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialogBuilder = new AlertDialog.Builder(context);
+                user_view = LayoutInflater.from(context).inflate(R.layout.user_profile, null);
+                dialogBuilder.setView(user_view);
+                dialog = dialogBuilder.create();
+
+                firebaseDatabase = FirebaseDatabase.getInstance();
+                databaseReference = firebaseDatabase.getReference("Users");
+                String username = holder.username_txt.getText().toString();
+                Query query = databaseReference.orderByChild("name").equalTo(username);
+                query.addValueEventListener(new ValueEventListener() {
+                    TextView user_name = user_view.findViewById(R.id.nameTv);
+                    TextView user_email = user_view.findViewById(R.id.emailTv);
+                    TextView user_phone = user_view.findViewById(R.id.phoneTv);
+                    TextView user_school = user_view.findViewById(R.id.schoolTv);
+                    TextView user_resHall = user_view.findViewById(R.id.resHallTv);
+                    ImageView user_avatar = user_view.findViewById(R.id.avatarIv);
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                        //check until required data get
+                        for (DataSnapshot ds: datasnapshot.getChildren()) {
+                            //get data
+                            String name = ""+ds.child("name").getValue();
+                            String email = ""+ds.child("email").getValue();
+                            String phone = ""+ds.child("phone").getValue();
+                            String image = ""+ds.child("image").getValue();
+                            String school = ""+ds.child("school").getValue();
+                            String resHall = ""+ds.child("resHall").getValue();
+
+                            //set data
+                            user_name.setText(name);
+                            user_email.setText(email);
+                            user_phone.setText(phone);
+                            user_school.setText(school);
+                            user_resHall.setText(resHall);
+
+                            try {
+                                Picasso.get().load(image).into(user_avatar);
+                            }
+                            catch(Exception e){
+                                Picasso.get().load(R.drawable.ic_person).into(user_avatar);
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {}
+                });
                 dialog.show();
             }
         });

@@ -113,9 +113,9 @@ public class LendExplorePageFragment extends Fragment {
                     }
 
                     //adapter
-                    postAdapter = new LendPostAdapter(getActivity(), postList);
+                    /*postAdapter = new LendPostAdapter(getActivity(), postList);
                     //set adapter to recyclerview
-                    recyclerView.setAdapter(postAdapter);
+                    recyclerView.setAdapter(postAdapter);*/
                 }
             }
             @Override
@@ -126,7 +126,7 @@ public class LendExplorePageFragment extends Fragment {
         });
     }
 
-    private void checkUserStatus() {
+    /*private void checkUserStatus() {
         //get current user
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
@@ -188,5 +188,5 @@ public class LendExplorePageFragment extends Fragment {
             checkUserStatus();
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

@@ -187,6 +187,7 @@ public class LendPostActivity extends AppCompatActivity {
                 else {
                     //post with image
                     uploadData(title, description, String.valueOf(imageUri));
+                    startActivity(new Intent(LendPostActivity.this, LendExplorePageFragment.class));
                 }
             }
         });

@@ -27,6 +27,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -73,6 +74,7 @@ public class ProfileFragment<ModelPost> extends Fragment {
     //view from xml
     ImageView avatarIv;
     TextView nameTv, emailTv, phoneTv, schoolTv, hallTv;
+    Button pwd_button;
     FloatingActionButton fab;
     RecyclerView postsRecyclerView;
 
@@ -127,6 +129,14 @@ public class ProfileFragment<ModelPost> extends Fragment {
         schoolTv=view.findViewById(R.id.schoolTv);
         hallTv=view.findViewById(R.id.hallTv);
         fab = view.findViewById(R.id.fab);
+        pwd_button = view.findViewById(R.id.pwd);
+
+        pwd_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //do stuff for changing password
+            }
+        });
 //        postsRecyclerView = view.findViewById(R.id.recyclerview_posts);
 
         //init progress dialog
@@ -146,6 +156,7 @@ public class ProfileFragment<ModelPost> extends Fragment {
                     String image = ""+ds.child("image").getValue();
                     String school = ""+ds.child("school").getValue();
                     String hall = ""+ds.child("hall").getValue();
+                    String pwd = ""+ds.child("password").getValue();
 
                     //set data
                     nameTv.setText(name);
@@ -209,6 +220,8 @@ public class ProfileFragment<ModelPost> extends Fragment {
         //request runtime storage permission
         requestPermissions(cameraPermissions, CAMERA_REQUEST_CODE);
     }
+
+
 
     private void showEditProfileDialog() {
         /*Show dialog containing options

@@ -92,6 +92,7 @@ public class FirstSignUpActivity extends AppCompatActivity {
                     intent.putExtra("userPass", password_input.getText().toString().trim());
                     intent.putExtra("userName", name_input.getText().toString().trim());
                     intent.putExtra("userPhone", phoneNum_input.getText().toString().trim());
+                    intent.putExtra("password", password_input.getText().toString().trim());
                     startActivity(intent);
                 }
             }

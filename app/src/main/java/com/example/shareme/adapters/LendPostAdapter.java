@@ -37,6 +37,7 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
     AlertDialog.Builder dialogBuilder;
     AlertDialog dialog;
     View user_view;
+    View confirm_lend;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
@@ -82,6 +83,7 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
         holder.postDescription_txt.setText("Description: " + pDescription);
         holder.postCategory_txt.setText("Category: " + pCategory);
         holder.postDuration_txt.setText("Duration: " + pDuration);
+        holder.postImage_image.setVisibility(View.GONE);
 
         //set user dp
         /*try {
@@ -107,7 +109,30 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
             @Override
             public void onClick(View v) {
                 //will implement later
-                Toast.makeText(context, "Lend", Toast.LENGTH_SHORT).show();
+                dialogBuilder = new AlertDialog.Builder(context);
+                confirm_lend = LayoutInflater.from(context).inflate(R.layout.confirm_lend, null);
+                dialogBuilder.setView(confirm_lend);
+                dialog = dialogBuilder.create();
+                dialog.show();
+
+                Button yesLend_button = confirm_lend.findViewById(R.id.yesLend_button);
+                Button noLend_button = confirm_lend.findViewById(R.id.noLend_button);
+
+                yesLend_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        firebaseDatabase = FirebaseDatabase.getInstance();
+                        firebaseDatabase.getReference("Lend_Posts").child(pId).removeValue();
+                    }
+                });
+
+                noLend_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
             }
         });
 
@@ -167,7 +192,7 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
         });
 
         //hide image box
-        Query query2 = databaseReference.orderByChild("pImage").equalTo("null");
+        /*Query query2 = databaseReference.orderByChild("pImage").equalTo("null");
         query2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
@@ -183,7 +208,7 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
-        });
+        });*/
 
 
     }

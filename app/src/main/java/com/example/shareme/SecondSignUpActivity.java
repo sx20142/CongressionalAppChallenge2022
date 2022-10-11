@@ -77,6 +77,7 @@ public class SecondSignUpActivity extends AppCompatActivity {
         password = intent.getStringExtra("userPass");
         name = intent.getStringExtra("userName");
         phoneNum = intent.getStringExtra("userPhone");
+        password = intent.getStringExtra("password");
         signUp_btn = findViewById(R.id.signUp_btn);
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
@@ -294,6 +295,7 @@ public class SecondSignUpActivity extends AppCompatActivity {
                             userInfo_hash.put("phone", phoneNum);
                             userInfo_hash.put("school", school);
                             userInfo_hash.put("resHall", resHall);
+                            userInfo_hash.put("password", password);
                             userInfo_hash.put("image", "");
                             //firebase database instance
                             FirebaseDatabase database = FirebaseDatabase.getInstance();

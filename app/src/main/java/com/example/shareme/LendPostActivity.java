@@ -137,6 +137,7 @@ public class LendPostActivity extends AppCompatActivity {
         durationAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         duration.setAdapter(durationAdaptor);
 
+
         duration.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -183,6 +184,7 @@ public class LendPostActivity extends AppCompatActivity {
                 if (imageUri == null) {
                     //post without image
                     uploadData(title, description,"noImage");
+                    startActivity(new Intent(LendPostActivity.this, LendExplorePageFragment.class));
                 }
                 else {
                     //post with image

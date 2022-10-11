@@ -22,15 +22,17 @@
     <!--find university text-->
     <TextView
         android:id="@+id/findUni_txt"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo"
-        android:text="find your school:"
-        android:textColor="@color/orange_yellow"
-        android:textSize="35sp"
-        android:textStyle="bold"
+        android:text="Find your school:"
+        android:textColor="#F8B503"
+        android:textSize="36dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/hero_regular"
+        android:textStyle="bold"
+        />
 
     <!--university dropdown-->
     <!--<Spinner
@@ -42,11 +44,16 @@
         android:spinnerMode="dropdown" />-->
     <EditText
         android:id="@+id/school_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="62dp"
         android:layout_below="@+id/findUni_txt"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
         android:hint="Texas schools..."
-        android:layout_marginHorizontal="10dp"/>
+
+        android:textColorHint="#FFB900"
+        app:boxBackgroundColor="@color/white" />
 
     <ListView
         android:id="@+id/school_list"
@@ -62,12 +69,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/school_spinner"
-        android:text="enter your residential hall:"
-        android:textColor="@color/orange_yellow"
+        android:text="Enter your residential hall:"
+        android:textColor="#F8B503"
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/hero_regular"/>
 
     <!--residential hall input-->
     <com.google.android.material.textfield.TextInputLayout
@@ -76,27 +84,29 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/enterResHall_txt"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp"
+        android:textColorHint="#FFB900"
+        app:boxBackgroundColor="@color/white">
         <EditText
             android:id="@+id/resHall_input"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="Residential Hall" />
+            android:hint="Residential Hall"
+            android:layout_gravity="center"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <!--sign up button-->
     <Button
         android:id="@+id/signUp_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/resHall_til"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:paddingHorizontal="40dp"
-        android:paddingVertical="10dp"
         android:text="Sign Up"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="25sp"
         app:cornerRadius="50dp"
         android:backgroundTint="@color/orange_yellow"/>

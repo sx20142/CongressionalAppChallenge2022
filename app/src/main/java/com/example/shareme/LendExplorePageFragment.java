@@ -126,7 +126,7 @@ public class LendExplorePageFragment extends Fragment {
         });
     }
 
-    /*private void checkUserStatus() {
+    private void checkUserStatus() {
         //get current user
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
@@ -188,5 +188,5 @@ public class LendExplorePageFragment extends Fragment {
             checkUserStatus();
         }
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 }

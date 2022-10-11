@@ -1,6 +1,7 @@
 package com.example.shareme.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.shareme.LendPostActivity;
 import com.example.shareme.R;
 import com.example.shareme.templates.LendPostTemplate;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,9 +29,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -43,6 +52,7 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
     FirebaseUser user;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    String phone;
 
     public LendPostAdapter(Context context, List<LendPostTemplate> postList) {
         this.context = context;
@@ -123,6 +133,20 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
                     public void onClick(View v) {
                         dialog.dismiss();
                         firebaseDatabase = FirebaseDatabase.getInstance();
+                        databaseReference = firebaseDatabase.getReference("Users");
+                        String username = holder.username_txt.getText().toString();
+                        Query query = databaseReference.orderByChild("name").equalTo(username);
+                        query.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                                //check until required data get
+                                for (DataSnapshot ds: datasnapshot.getChildren())
+                                    phone = ""+ds.child("phone").getValue();
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {}
+                        });
+                        addLendNotification(uName, phone, pTitle);
                         firebaseDatabase.getReference("Lend_Posts").child(pId).removeValue();
                     }
                 });
@@ -191,26 +215,26 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
             }
         });
 
-        //hide image box
-        /*Query query2 = databaseReference.orderByChild("pImage").equalTo("null");
-        query2.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                //check until required data get
-                for (DataSnapshot ds: datasnapshot.getChildren()) {
-                    //get data
-                    String image = ""+ds.child("pImage").getValue();
+    }
 
-                    //set data
-                    if (image == "null")
-                        holder.postImage_image.setVisibility(View.INVISIBLE);
-                }
+    private void addLendNotification(String uName, String uPhone, String pTitle) {
+        String timeStamp = String.valueOf(System.currentTimeMillis());
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference data_ref = database.getReference("Lend_Notifications");
+        data_ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                HashMap<Object, String> lendNotification_hashMap = new HashMap<>();
+                //put post info
+                lendNotification_hashMap.put("otherName", uName);
+                lendNotification_hashMap.put("otherPhone", phone);
+                lendNotification_hashMap.put("itemName", pTitle);
+                data_ref.child(timeStamp).setValue(lendNotification_hashMap);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
-        });*/
-
-
+        });
     }
 
     @Override

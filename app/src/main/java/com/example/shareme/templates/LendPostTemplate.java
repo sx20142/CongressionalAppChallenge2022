@@ -1,13 +1,13 @@
 package com.example.shareme.templates;
 
 public class LendPostTemplate {
-    String pId, pCategory, pDuration, pTitle, pDescr, pImage, pTime, uid, uEmail, uName;
+    String pId, pCategory, pDuration, pTitle, pDescr, pImage, pTime, uid, uEmail, uName, uPhone;
     //uDp
 
     public LendPostTemplate() {
     }
 
-    public LendPostTemplate(String pId, String pCategory, String pDuration, String pTitle, String pDescr, String pImage, String pTime, String uid, String uEmail, String uName) { //String uDp
+    public LendPostTemplate(String pId, String pCategory, String pDuration, String pTitle, String pDescr, String pImage, String pTime, String uid, String uEmail, String uName, String uPhone) { //String uDp
         this.pId = pId;
         this.pCategory = pCategory;
         this.pDuration = pDuration;
@@ -19,6 +19,7 @@ public class LendPostTemplate {
         this.uEmail = uEmail;
         //this.uDp = uDp;
         this.uName = uName;
+        this.uPhone = uPhone;
     }
 
     public String getpId() {
@@ -107,5 +108,13 @@ public class LendPostTemplate {
 
     public void setuName(String uName) {
         this.uName = uName;
+    }
+
+    public String getuPhone() {
+        return uPhone;
+    }
+
+    public void setuPhone(String uPhone) {
+        this.uName = uPhone;
     }
 }

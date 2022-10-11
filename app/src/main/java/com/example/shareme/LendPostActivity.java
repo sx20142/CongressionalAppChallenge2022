@@ -68,7 +68,7 @@ public class LendPostActivity extends AppCompatActivity {
     ProgressDialog pd;
     Spinner category, duration;
     ArrayAdapter<String> categoryAdaptor, durationAdaptor;
-    String name, email, uid, dp, categorySelected, durationSelected;
+    String name, email, uid, phone, dp, categorySelected, durationSelected;
     Button add_post;
 
     @Override
@@ -223,6 +223,7 @@ public class LendPostActivity extends AppCompatActivity {
                                 lendPost_hashMap.put("uid", uid);
                                 lendPost_hashMap.put("uName", name);
                                 lendPost_hashMap.put("uEmail", email);
+                                lendPost_hashMap.put("uPhone", phone);
                                 lendPost_hashMap.put("uDp", dp);
                                 lendPost_hashMap.put("pId", timeStamp);
                                 lendPost_hashMap.put("pCategory", categorySelected);
@@ -277,6 +278,7 @@ public class LendPostActivity extends AppCompatActivity {
             lendPost_hashMap.put("uid", uid);
             lendPost_hashMap.put("uName", name);
             lendPost_hashMap.put("uEmail", email);
+            lendPost_hashMap.put("uPhone", phone);
             lendPost_hashMap.put("uDp", dp);
             lendPost_hashMap.put("pId", timeStamp);
             lendPost_hashMap.put("pCategory", categorySelected);

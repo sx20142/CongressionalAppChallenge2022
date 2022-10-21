@@ -31,7 +31,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         //Actionbar and its title
         actionBar = getSupportActionBar();
-        actionBar.setTitle("Home");
+        actionBar.setTitle("Borrow");
 
         //initialize variables
         firebaseAuth = FirebaseAuth.getInstance();
@@ -54,15 +54,15 @@ public class DashboardActivity extends AppCompatActivity {
                     //handle item clicks
                     switch (menuItem.getItemId()) {
                         case R.id.explorePage_fragment:
-                            actionBar.setTitle("Home");
+                            actionBar.setTitle("Borrow");
                             LendExplorePageFragment fragment1 = new LendExplorePageFragment();
                             FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
                             ft1.replace(R.id.content, fragment1, "");
                             ft1.commit();
                             return true;
-                        case R.id.searchPage_fragment:
-                            actionBar.setTitle("Search");
-                            SearchPageFragment fragment2 = new SearchPageFragment();
+                        case R.id.borrowPage_fragment:
+                            actionBar.setTitle("Lend");
+                            BorrowPostFragment fragment2 = new BorrowPostFragment();
                             FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
                             ft2.replace(R.id.content, fragment2, "");
                             ft2.commit();

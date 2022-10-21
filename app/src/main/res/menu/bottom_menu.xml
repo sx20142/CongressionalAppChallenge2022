@@ -3,18 +3,18 @@
 
     <item
         android:id="@+id/explorePage_fragment"
-        android:icon="@drawable/ic_baseline_home_24"
-        android:title="Home" />
+        android:icon="@drawable/ic_baseline_expand_more_24"
+        android:title="Borrow" />
 
     <item
-        android:id="@+id/searchPage_fragment"
-        android:icon="@drawable/ic_baseline_search_24"
-        android:title="Search" />
+        android:id="@+id/borrowPage_fragment"
+        android:icon="@drawable/ic_baseline_expand_less_24"
+        android:title="Lend" />
 
     <item
         android:id="@+id/addPost_fragment"
         android:icon="@drawable/ic_baseline_add_circle_outline_24"
-        android:title="" />
+        android:title="Add" />
 
     <item
         android:id="@+id/notifications_fragment"

@@ -1,15 +1,16 @@
 package com.example.shareme.templates;
 
-public class LendNotificationsTemplate {
-    String otherName, otherPhone, itemName;
+public class NotificationsTemplate {
+    String otherName, otherPhone, itemName, lendOrBorrow;
 
-    public LendNotificationsTemplate() {
+    public NotificationsTemplate() {
     }
 
-    public LendNotificationsTemplate(String otherName, String otherPhone, String itemName) {
+    public NotificationsTemplate(String otherName, String otherPhone, String itemName, String lendOrBorrow) {
         this.otherName = otherName;
         this.otherPhone = otherPhone;
         this.itemName = itemName;
+        this.lendOrBorrow = lendOrBorrow;
     }
 
     public String getOtherName() {
@@ -34,5 +35,13 @@ public class LendNotificationsTemplate {
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
+    }
+
+    public String getLendOrBorrow() {
+        return lendOrBorrow;
+    }
+
+    public void setLendOrBorrow(String lendOrBorrow) {
+        this.lendOrBorrow = lendOrBorrow;
     }
 }

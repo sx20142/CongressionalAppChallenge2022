@@ -57,7 +57,6 @@ public class LendPostActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     ActionBar actionBar;
     EditText item_name, extra_info;
-    ImageView image;
     Uri imageUri = null;
     private static final int CAMERA_REQUEST = 100;
     private static final int STORAGE_REQUEST = 200;
@@ -85,11 +84,10 @@ public class LendPostActivity extends AppCompatActivity {
         item_name = findViewById(R.id.item_name);
         extra_info = findViewById(R.id.extra_info);
         add_post = findViewById(R.id.upload);
-        image = findViewById(R.id.image);
         pd = new ProgressDialog(this);
         pd.setCanceledOnTouchOutside(false);
         actionBar = getSupportActionBar();
-        actionBar.setTitle("Add New Item To Lend");
+        actionBar.setTitle("Add New Item");
         actionBar.setSubtitle(email);
 
         //enable back button in actionbar
@@ -147,18 +145,6 @@ public class LendPostActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        // Initialising camera and storage permission
-        cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
-        // After click on image we will be selecting an image
-        image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showImagePicDialog();
-            }
-        });
-
         // Now we will add the post
         add_post.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,12 +170,12 @@ public class LendPostActivity extends AppCompatActivity {
                 if (imageUri == null) {
                     //post without image
                     uploadData(title, description,"noImage");
-                    startActivity(new Intent(LendPostActivity.this, LendExplorePageFragment.class));
+                    startActivity(new Intent(LendPostActivity.this, AddPostFragment.class));
                 }
                 else {
                     //post with image
                     uploadData(title, description, String.valueOf(imageUri));
-                    startActivity(new Intent(LendPostActivity.this, LendExplorePageFragment.class));
+                    startActivity(new Intent(LendPostActivity.this, AddPostFragment.class));
                 }
             }
         });
@@ -247,7 +233,6 @@ public class LendPostActivity extends AppCompatActivity {
                                                 //reset views
                                                 item_name.setText("");
                                                 extra_info.setText("");
-                                                image.setImageURI(null);
                                                 imageUri = null;
                                             }
                                         })
@@ -302,7 +287,6 @@ public class LendPostActivity extends AppCompatActivity {
                             //reset views
                             item_name.setText("");
                             extra_info.setText("");
-                            image.setImageURI(null);
                             imageUri= null;
                         }
                     })
@@ -315,114 +299,6 @@ public class LendPostActivity extends AppCompatActivity {
                         }
 
                     });
-        }
-    }
-
-    private void showImagePicDialog() {
-        String options[] = {"Camera", "Gallery"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(LendPostActivity.this);
-        builder.setTitle("Pick Image From");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // check for the camera and storage permission if
-                // not given the request for permission
-                if (which == 0) {
-                    if (!checkCameraPermission()) {
-                        requestCameraPermission();
-                    } else {
-                        pickFromCamera();
-                    }
-                } else if (which == 1) {
-                    if (!checkStoragePermission()) {
-                        requestStoragePermission();
-                    } else {
-                        pickFromGallery();
-                    }
-                }
-            }
-        });
-        builder.create().show();
-    }
-
-    // check camera permission to click picture using camera
-    private Boolean checkCameraPermission() {
-        boolean result = ContextCompat.checkSelfPermission(LendPostActivity.this, Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
-        boolean result1 = ContextCompat.checkSelfPermission(LendPostActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
-        return result && result1;
-    }
-
-    // request for permission to click photo using camera in app
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private void requestCameraPermission() {
-        requestPermissions(cameraPermission, CAMERA_REQUEST);
-    }
-
-    // request for permission to write data into storage
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private void requestStoragePermission() {
-        requestPermissions(storagePermission, STORAGE_REQUEST);
-    }
-
-    // check for storage permission
-    private Boolean checkStoragePermission() {
-        boolean result = ContextCompat.checkSelfPermission(LendPostActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                == (PackageManager.PERMISSION_GRANTED);
-        return result;
-    }
-
-    // if access is given then pick image from camera and then put
-    // the imageUri in intent extra and pass to startactivityforresult
-    private void pickFromCamera() {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(MediaStore.Images.Media.TITLE, "Temp_pic");
-        contentValues.put(MediaStore.Images.Media.DESCRIPTION, "Temp Description");
-        imageUri = LendPostActivity.this.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
-        Intent camerIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        camerIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        startActivityForResult(camerIntent, IMAGE_PICK_CAMERA_REQUEST);
-    }
-
-    // if access is given then pick image from gallery
-    private void pickFromGallery() {
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK);
-        galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, IMAGE_PICK_GALLERY_REQUEST);
-    }
-
-    // if not given then request for permission after that check if request is given or not
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case CAMERA_REQUEST: {
-                if (grantResults.length > 0) {
-                    boolean camera_accepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean writeStorageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-
-                    // if request access given the pick data
-                    if (camera_accepted && writeStorageAccepted) {
-                        pickFromCamera();
-                    } else {
-                        Toast.makeText(LendPostActivity.this, "Please Enable Camera and Storage Permissions", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-            // function end
-            break;
-            case STORAGE_REQUEST: {
-                if (grantResults.length > 0) {
-                    boolean writeStorageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-
-                    // if request access given the pick data
-                    if (writeStorageAccepted) {
-                        pickFromGallery();
-                    } else {
-                        Toast.makeText(LendPostActivity.this, "Please Enable Storage Permissions", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-            break;
         }
     }
 
@@ -479,22 +355,4 @@ public class LendPostActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        //this method will be called after picking image from camera or gallery
-        if (resultCode == RESULT_OK) {
-            if (requestCode == IMAGE_PICK_GALLERY_REQUEST) {
-                //image is picked from gallery, get uri of image
-                imageUri = data.getData();
-                //set to imageview
-                image.setImageURI(imageUri);
-            }
-            else if (requestCode == IMAGE_PICK_CAMERA_REQUEST) {
-                image.setImageURI(imageUri);
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
 }

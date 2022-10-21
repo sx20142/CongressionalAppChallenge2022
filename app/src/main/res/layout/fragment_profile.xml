@@ -13,29 +13,8 @@
         android:layout_height="120dp"
         android:background="@color/light_gray"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:src="@drawable/ic_camera" />
-
-<!--    <android.support.v7.widget.CardView-->
-<!--        android:layout_width="80dp"-->
-<!--        android:layout_height="80dp"-->
-<!--        android:elevation="12dp"-->
-<!--        android:id="@+id/view2"-->
-<!--        app:cardCornerRadius="40dp"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:innerRadius="0dp"-->
-<!--        android:shape="ring"-->
-<!--        android:thicknessRatio="1.9">-->
-<!--        <ImageView-->
-<!--            android:id="@+id/avatarIv"-->
-<!--            android:layout_height="80dp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:src="@drawable/ic_person"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:gravity="center"-->
-<!--            android:background="@color/light_gray"/>-->
-<!--    </android.support.v7.widget.CardView>-->
 
     <TextView
         android:id="@+id/nameTv"
@@ -44,7 +23,7 @@
         android:textColor="@color/black"
         android:text="Name"
         android:gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:textSize="25sp" />
 
     <TextView
@@ -53,6 +32,7 @@
         android:layout_height="wrap_content"
         android:text="Email"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:textColor="@color/black" />
 
     <TextView
@@ -61,6 +41,7 @@
         android:layout_height="wrap_content"
         android:text="Phone"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:textColor="@color/black" />
 
     <TextView
@@ -69,6 +50,7 @@
         android:layout_height="wrap_content"
         android:text="School"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:textColor="@color/black" />
 
     <TextView
@@ -77,6 +59,7 @@
         android:layout_height="wrap_content"
         android:text="Residential Hall"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:textColor="@color/black" />
 
         <!--Floating Action button-->
@@ -84,8 +67,8 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="325dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginStart="275dp"
+        android:layout_marginTop="150dp"
         android:src="@drawable/ic_editpen"
         app:backgroundTint="@color/orange_yellow" />
 

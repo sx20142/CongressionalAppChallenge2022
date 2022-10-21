@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LendExplorePageFragment">
+    tools:context=".BorrowPostFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notifications_recView"
+        android:id="@+id/borrowPosts_recView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

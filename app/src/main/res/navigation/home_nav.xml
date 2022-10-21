@@ -12,9 +12,9 @@
         tools:layout="@layout/fragment_lend_explore_page" />
     <fragment
         android:id="@+id/searchPageFragment"
-        android:name="com.example.shareme.SearchPageFragment"
+        android:name="com.example.shareme.BorrowPostFragment"
         android:label="fragment_search_page"
-        tools:layout="@layout/fragment_search_page" />
+        tools:layout="@layout/fragment_borrow_page" />
     <fragment
         android:id="@+id/addPostFragment"
         android:name="com.example.shareme.AddPostFragment"

@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".LendExplorePageFragment">
+    tools:context=".BorrowPostFragment">
 
     <TextView
         android:id="@+id/questionTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="Are you sure you want to borrow this item?"
+        android:text="Are you sure you want to lend this item?"
         android:gravity="center"
         android:layout_marginTop="30dp"
         android:textSize="15sp" />
@@ -27,14 +27,14 @@
         android:layout_alignParentBottom="true">
 
         <Button
-            android:id="@+id/yesLend_button"
+            android:id="@+id/yesBorrow_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:text="Yes"/>
 
         <Button
-            android:id="@+id/noLend_button"
+            android:id="@+id/noBorrow_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"

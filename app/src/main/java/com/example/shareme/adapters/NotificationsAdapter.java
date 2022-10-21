@@ -1,47 +1,35 @@
 package com.example.shareme.adapters;
 
 import android.content.Context;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shareme.R;
-import com.example.shareme.templates.LendNotificationsTemplate;
-import com.example.shareme.templates.LendPostTemplate;
+import com.example.shareme.templates.NotificationsTemplate;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
-public class LendNotificationsAdapter extends RecyclerView.Adapter<LendNotificationsAdapter.MyHolder> {
+public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdapter.MyHolder> {
 
     Context context;
-    List<LendNotificationsTemplate> notificationsList;
+    List<NotificationsTemplate> notificationsList;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
-    public LendNotificationsAdapter(Context context, List<LendNotificationsTemplate> notificationsList) {
+    public NotificationsAdapter(Context context, List<NotificationsTemplate> notificationsList) {
         this.context = context;
         this.notificationsList = notificationsList;
     }
@@ -58,8 +46,12 @@ public class LendNotificationsAdapter extends RecyclerView.Adapter<LendNotificat
         String otherName = notificationsList.get(position).getOtherName();
         String itemName = notificationsList.get(position).getItemName();
         String otherPhone = notificationsList.get(position).getOtherPhone();
+        String lendOrBorrow = notificationsList.get(position).getLendOrBorrow();
 
-        holder.name_item_txt.setText("You lent " + otherName + " a " +  itemName);
+        if (lendOrBorrow == "borrow")
+            holder.name_item_txt.setText("You lent " + otherName + " a " +  itemName);
+        else
+            holder.name_item_txt.setText("You borrowed a(n) " + itemName + " from " +  otherName);
         holder.otherPhone_txt.setText("Please message " + otherPhone + " to sort out the details!");
     }
 

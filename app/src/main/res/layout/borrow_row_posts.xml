@@ -69,10 +69,10 @@
             android:textColor="@color/black"
             android:autoLink="all"/>
         <TextView
-            android:id="@+id/postDuration_txt"
+            android:id="@+id/postUrgency_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Post duration"
+            android:text="Post urgency"
             android:textColor="@color/black"
             android:autoLink="all"/>
         <TextView
@@ -94,12 +94,12 @@
             android:orientation="horizontal"
             android:gravity="center">
             <Button
-                android:id="@+id/lend_btn"
+                android:id="@+id/borrow_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
-                android:text="BORROW"/>
+                android:text="LEND"/>
         </LinearLayout>
 
     </LinearLayout>

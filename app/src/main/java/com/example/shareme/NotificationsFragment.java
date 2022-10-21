@@ -10,15 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.shareme.adapters.LendNotificationsAdapter;
-import com.example.shareme.adapters.LendPostAdapter;
-import com.example.shareme.templates.LendNotificationsTemplate;
-import com.example.shareme.templates.LendPostTemplate;
+import com.example.shareme.adapters.NotificationsAdapter;
+import com.example.shareme.templates.NotificationsTemplate;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,8 +32,8 @@ public class NotificationsFragment extends Fragment {
     //declare variables
     FirebaseAuth firebaseAuth;
     RecyclerView recyclerView;
-    List<LendNotificationsTemplate> notificationsList;
-    LendNotificationsAdapter notificationsAdapter;
+    List<NotificationsTemplate> notificationsList;
+    NotificationsAdapter notificationsAdapter;
 
     public NotificationsFragment() {
         // Required empty public constructor
@@ -51,7 +48,7 @@ public class NotificationsFragment extends Fragment {
         //initialize variables
         firebaseAuth = FirebaseAuth.getInstance();
         //recycler view and its properties
-        recyclerView = view.findViewById(R.id.lendNotifications_recView);
+        recyclerView = view.findViewById(R.id.notifications_recView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         //show newest post first, so load from last
         layoutManager.setStackFromEnd(true);
@@ -68,18 +65,18 @@ public class NotificationsFragment extends Fragment {
 
     private void loadNotifications() {
         //path of all posts
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Lend_Notifications");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("LendBorrow_Notifications");
         //get all data from this ref
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 notificationsList.clear();
                 for (DataSnapshot ds: snapshot.getChildren()){
-                    LendNotificationsTemplate notificationsTemplate = ds.getValue(LendNotificationsTemplate.class);
+                    NotificationsTemplate notificationsTemplate = ds.getValue(NotificationsTemplate.class);
 
                     notificationsList.add(notificationsTemplate);
                     //adapter
-                    notificationsAdapter = new LendNotificationsAdapter(getActivity(), notificationsList);
+                    notificationsAdapter = new NotificationsAdapter(getActivity(), notificationsList);
                     //set adapter to recyclerview
                     recyclerView.setAdapter(notificationsAdapter);
                 }

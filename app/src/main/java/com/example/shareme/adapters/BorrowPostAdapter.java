@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shareme.LendPostActivity;
 import com.example.shareme.R;
+import com.example.shareme.templates.BorrowPostTemplate;
 import com.example.shareme.templates.LendPostTemplate;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,14 +40,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHolder> {
+public class BorrowPostAdapter extends RecyclerView.Adapter<BorrowPostAdapter.MyHolder> {
 
     Context context;
-    List<LendPostTemplate> postList;
+    List<BorrowPostTemplate> postList;
     AlertDialog.Builder dialogBuilder;
     AlertDialog dialog;
     View user_view;
-    View confirm_lend;
+    View confirm_borrow;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
@@ -54,7 +55,7 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
     DatabaseReference databaseReference;
     String phone;
 
-    public LendPostAdapter(Context context, List<LendPostTemplate> postList) {
+    public BorrowPostAdapter(Context context, List<BorrowPostTemplate> postList) {
         this.context = context;
         this.postList = postList;
     }
@@ -62,7 +63,7 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.lend_row_posts, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.borrow_row_posts, parent, false);
         return new MyHolder(view);
     }
 
@@ -72,10 +73,9 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
         String uid = postList.get(position).getUid();
         String uEmail = postList.get(position).getuEmail();
         String uName = postList.get(position).getuName();
-        //String uDp = postList.get(position).getuDp();
         String pId = postList.get(position).getpId();
         String pCategory = postList.get(position).getpCategory();
-        String pDuration = postList.get(position).getpDuration();
+        String pUrgency = postList.get(position).getpUrgency();
         String pTitle = postList.get(position).getpTitle();
         String pDescription = postList.get(position).getpDescr();
         String pImage = postList.get(position).getpImage();
@@ -92,21 +92,21 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
         holder.postTitle_txt.setText(pTitle);
         holder.postDescription_txt.setText("Description: " + pDescription);
         holder.postCategory_txt.setText("Category: " + pCategory);
-        holder.postDuration_txt.setText("Duration: " + pDuration);
+        holder.postUrgency_txt.setText("Urgency: " + pUrgency);
 
         //handle button clicks
-        holder.lend_btn.setOnClickListener(new View.OnClickListener() {
+        holder.borrow_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //will implement later
                 dialogBuilder = new AlertDialog.Builder(context);
-                confirm_lend = LayoutInflater.from(context).inflate(R.layout.confirm_lend, null);
-                dialogBuilder.setView(confirm_lend);
+                confirm_borrow = LayoutInflater.from(context).inflate(R.layout.confirm_borrow, null);
+                dialogBuilder.setView(confirm_borrow);
                 dialog = dialogBuilder.create();
                 dialog.show();
 
-                Button yesLend_button = confirm_lend.findViewById(R.id.yesLend_button);
-                Button noLend_button = confirm_lend.findViewById(R.id.noLend_button);
+                Button yesLend_button = confirm_borrow.findViewById(R.id.yesBorrow_button);
+                Button noLend_button = confirm_borrow.findViewById(R.id.noBorrow_button);
 
                 yesLend_button.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -126,8 +126,8 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {}
                         });
-                        addLendNotification(uName, phone, pTitle);
-                        firebaseDatabase.getReference("Lend_Posts").child(pId).removeValue();
+                        addBorrowNotification(uName, phone, pTitle);
+                        firebaseDatabase.getReference("Borrow_Posts").child(pId).removeValue();
                     }
                 });
 
@@ -197,20 +197,20 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
 
     }
 
-    private void addLendNotification(String uName, String uPhone, String pTitle) {
+    private void addBorrowNotification(String uName, String uPhone, String pTitle) {
         String timeStamp = String.valueOf(System.currentTimeMillis());
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference data_ref = database.getReference("LendBorrow_Notifications");
         data_ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                HashMap<Object, String> lendNotification_hashMap = new HashMap<>();
+                HashMap<Object, String> borrowNotification_hashMap = new HashMap<>();
                 //put post info
-                lendNotification_hashMap.put("otherName", uName);
-                lendNotification_hashMap.put("otherPhone", phone);
-                lendNotification_hashMap.put("itemName", pTitle);
-                lendNotification_hashMap.put("lendOrBorrow", "lend");
-                data_ref.child(timeStamp).setValue(lendNotification_hashMap);
+                borrowNotification_hashMap.put("otherName", uName);
+                borrowNotification_hashMap.put("otherPhone", phone);
+                borrowNotification_hashMap.put("itemName", pTitle);
+                borrowNotification_hashMap.put("lendOrBorrow", "borrow");
+                data_ref.child(timeStamp).setValue(borrowNotification_hashMap);
             }
 
             @Override
@@ -228,8 +228,8 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
 
         //declare views from row_posts.xml
         ImageView userPfp_image;
-        TextView username_txt, postTime_txt, postTitle_txt, postDescription_txt, postCategory_txt, postDuration_txt;
-        Button lend_btn;
+        TextView username_txt, postTime_txt, postTitle_txt, postDescription_txt, postCategory_txt, postUrgency_txt;
+        Button borrow_btn;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
@@ -240,9 +240,9 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
             postTime_txt = itemView.findViewById(R.id.postTime_txt);
             postTitle_txt = itemView.findViewById(R.id.postTitle_txt);
             postCategory_txt = itemView.findViewById(R.id.postCategory_txt);
-            postDuration_txt = itemView.findViewById(R.id.postDuration_txt);
+            postUrgency_txt = itemView.findViewById(R.id.postUrgency_txt);
             postDescription_txt = itemView.findViewById(R.id.postDescription_txt);
-            lend_btn = itemView.findViewById(R.id.lend_btn);
+            borrow_btn = itemView.findViewById(R.id.borrow_btn);
 
         }
     }

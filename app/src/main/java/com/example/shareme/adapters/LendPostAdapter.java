@@ -72,7 +72,6 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
         String uid = postList.get(position).getUid();
         String uEmail = postList.get(position).getuEmail();
         String uName = postList.get(position).getuName();
-        //String uDp = postList.get(position).getuDp();
         String pId = postList.get(position).getpId();
         String pCategory = postList.get(position).getpCategory();
         String pDuration = postList.get(position).getpDuration();
@@ -212,7 +211,6 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
                 lendNotification_hashMap.put("lendOrBorrow", "lend");
                 data_ref.child(timeStamp).setValue(lendNotification_hashMap);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
@@ -223,10 +221,8 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
         return postList.size();
     }
 
-    //view holder class
     class MyHolder extends RecyclerView.ViewHolder {
 
-        //declare views from row_posts.xml
         ImageView userPfp_image;
         TextView username_txt, postTime_txt, postTitle_txt, postDescription_txt, postCategory_txt, postDuration_txt;
         Button lend_btn;
@@ -243,7 +239,6 @@ public class LendPostAdapter extends RecyclerView.Adapter<LendPostAdapter.MyHold
             postDuration_txt = itemView.findViewById(R.id.postDuration_txt);
             postDescription_txt = itemView.findViewById(R.id.postDescription_txt);
             lend_btn = itemView.findViewById(R.id.lend_btn);
-
         }
     }
 }

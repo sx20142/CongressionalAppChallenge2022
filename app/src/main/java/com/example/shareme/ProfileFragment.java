@@ -210,11 +210,6 @@ public class ProfileFragment<ModelPost> extends Fragment {
     }
 
     private void showEditProfileDialog() {
-        /*Show dialog containing options
-         * 1) Edit Profile Picture
-         * 3) Edit Name
-         * 4) Edit Phone*/
-
         //options to show in dialog
         String options[] = {"Edit Profile Picture", "Edit Name", "Edit Phone", "Edit School", "Edit Residential Hall"};
         //alert dialog
@@ -227,27 +222,22 @@ public class ProfileFragment<ModelPost> extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 //handle dialog item clicks
                 if (which == 0) {
-                    //Edit Profile clicked
                     pd.setMessage("Updating Profile Picture");
-                    profileOrCoverPhoto = "image"; //i.e. changing profile picture, make sure to assign same value
+                    profileOrCoverPhoto = "image";
                     showImagePicDialog();
                 } else if (which == 1) {
-                    //Edit Name clicked
                     pd.setMessage("Updating Name");
                     //calling method and pass key "name" as parameter to update it's value in database
                     showNamePhoneUpdateDialog("name");
                 } else if (which == 2) {
-                    //Edit Phone clicked
                     pd.setMessage("Updating Phone");
                     showNamePhoneUpdateDialog("phone");
                 }
                 else if (which == 3) {
-                    //Edit Phone clicked
                     pd.setMessage("Updating School");
                     showNamePhoneUpdateDialog("school");
                 }
                 else if (which == 4) {
-                    //Edit Phone clicked
                     pd.setMessage("Updating Residential Hall");
                     showNamePhoneUpdateDialog("resHall");
                 }
@@ -258,22 +248,16 @@ public class ProfileFragment<ModelPost> extends Fragment {
     }
 
     private void showNamePhoneUpdateDialog(final String key) {
-        /*parameter "key" will contain value:
-            either "name"  which is key in user's database which is used to update user's name
-            or     "phone" which is key in user's database which is used to update user's phone*/
-
-        //custom dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Update "+ key); //e.g. Update name OR Update phone
+        builder.setTitle("Update "+ key);
         //set layout of dialog
         LinearLayout linearLayout = new LinearLayout(getActivity());
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         linearLayout.setPadding(10,10,10,10);
         //add edit text
         final EditText editText = new EditText(getActivity());
-        editText.setHint("Enter "+key); //hint e.g. Edit name OR Edit phone
+        editText.setHint("Enter "+key);
         linearLayout.addView(editText);
-
         builder.setView(linearLayout);
 
         //add button in dialog to update
@@ -287,7 +271,6 @@ public class ProfileFragment<ModelPost> extends Fragment {
                     pd.show();
                     HashMap<String, Object> result = new HashMap<>();
                     result.put(key, value);
-
 
                     databaseReference.child(user.getUid()).updateChildren(result)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -465,21 +448,6 @@ public class ProfileFragment<ModelPost> extends Fragment {
         //show progress
         pd.show();
 
-        /*Instead of creating separate function for Profile Picture and Cover Photo
-         * i'm doing work for both in same function
-         *
-         * To add check ill add a string variable and assign it value "image" when user clicks
-         * "Edit Profile Pic", and assign it value "cover" when user clicks "Edit Cover Photo"
-         * Here: image is the key in each user containing url of user's profile picture
-         *       cover is the key in each user containing url of user's cover photo */
-
-        /*The parameter "image_uri" contains the uri of image picked either from camera or gallery
-         * We will use UID of the currently signed in user as name of the image so there will be only one image for
-         * profile and one image for cover for each user*/
-
-        //path and name of image to be stored in firebase storage
-        //e.g. Users_Profile_Cover_Imgs/image_e12f3456f789.jpg
-        //e.g. Users_Profile_Cover_Imgs/cover_c123n4567g89.jpg
         String filePathAndName = storagePath + "" + profileOrCoverPhoto + "_" + user.getUid();
 
         StorageReference storageReference2nd = storageReference.child(filePathAndName);
@@ -495,21 +463,13 @@ public class ProfileFragment<ModelPost> extends Fragment {
                         //check if image is uploaded or not and url is received
                         if (uriTask.isSuccessful()) {
                             //image uploaded
-                            //add/update url in user's database
                             HashMap<String, Object> results = new HashMap<>();
-                            /*First Parameter is profileOrCoverPhoto that has value "image" or "cover"
-                              which are keys in user's database where url of image will be saved in one
-                              of them
-                              Second Parameter contains the url of the image stored in firebase storage, this
-                              url will be saved as value against key "image" or "cover"*/
                             results.put(profileOrCoverPhoto, downloadUri.toString());
 
                             databaseReference.child(user.getUid()).updateChildren(results)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            //url in database of user is added successfully
-                                            //dismiss progress bar
                                             pd.dismiss();
                                             Toast.makeText(getActivity(), "Image Updated...", Toast.LENGTH_SHORT).show();
                                         }
@@ -517,8 +477,6 @@ public class ProfileFragment<ModelPost> extends Fragment {
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            //error adding url in database of user
-                                            //dismiss progress bar
                                             pd.dismiss();
                                             Toast.makeText(getActivity(), "Erro Updating Image...", Toast.LENGTH_SHORT).show();
                                         }
@@ -536,7 +494,6 @@ public class ProfileFragment<ModelPost> extends Fragment {
                                             dataSnapshot.getRef().child(child).child("uDp").setValue(downloadUri.toString());
                                         }
                                     }
-
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError databaseError) {}
                                 });
@@ -558,7 +515,6 @@ public class ProfileFragment<ModelPost> extends Fragment {
                                                             dataSnapshot.getRef().child(child).child("uDp").setValue(downloadUri.toString());
                                                         }
                                                     }
-
                                                     @Override
                                                     public void onCancelled(@NonNull DatabaseError databaseError) {}
                                                 });
@@ -569,7 +525,6 @@ public class ProfileFragment<ModelPost> extends Fragment {
                                     public void onCancelled(@NonNull DatabaseError databaseError) {}
                                 });
                             }
-
                         } else {
                             //error
                             pd.dismiss();

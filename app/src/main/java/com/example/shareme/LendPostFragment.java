@@ -33,7 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LendExplorePageFragment extends Fragment {
+public class LendPostFragment extends Fragment {
 
     //declare variables
     FirebaseAuth firebaseAuth;
@@ -41,7 +41,7 @@ public class LendExplorePageFragment extends Fragment {
     List<LendPostTemplate> postList;
     LendPostAdapter postAdapter;
 
-    public LendExplorePageFragment() {
+    public LendPostFragment() {
         // Required empty public constructor
     }
 
@@ -78,11 +78,8 @@ public class LendExplorePageFragment extends Fragment {
                 postList.clear();
                 for (DataSnapshot ds: snapshot.getChildren()){
                     LendPostTemplate postTemplate = ds.getValue(LendPostTemplate.class);
-
                     postList.add(postTemplate);
-                    //adapter
                     postAdapter = new LendPostAdapter(getActivity(), postList);
-                    //set adapter to recyclerview
                     recyclerView.setAdapter(postAdapter);
                 }
             }
@@ -95,7 +92,6 @@ public class LendExplorePageFragment extends Fragment {
     }
 
     private void searchPosts(final String searchQuery){
-
         //path of all posts
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Lend_Posts");
         //get all data from this ref
@@ -106,16 +102,10 @@ public class LendExplorePageFragment extends Fragment {
                 for (DataSnapshot ds: snapshot.getChildren()){
                     LendPostTemplate postTemplate = ds.getValue(LendPostTemplate.class);
 
-
                     if (postTemplate.getpTitle().toLowerCase().contains(searchQuery.toLowerCase()) ||
                             postTemplate.getpDescr().toLowerCase().contains(searchQuery.toLowerCase())){
                         postList.add(postTemplate);
                     }
-
-                    //adapter
-                    /*postAdapter = new LendPostAdapter(getActivity(), postList);
-                    //set adapter to recyclerview
-                    recyclerView.setAdapter(postAdapter);*/
                 }
             }
             @Override
@@ -129,11 +119,7 @@ public class LendExplorePageFragment extends Fragment {
     private void checkUserStatus() {
         //get current user
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (user != null) {
-            //user is signed in stay here
-            //set email of logged in user
-            //profile_txt.setText(user.getEmail());
-        }
+        if (user != null) {}
         else {
             //user not signed in, go to main activity
             startActivity(new Intent(getActivity(), MainActivity.class));
@@ -187,9 +173,6 @@ public class LendExplorePageFragment extends Fragment {
             firebaseAuth.signOut();
             checkUserStatus();
         }
-       // else if (R.id.action_settings) {
-
-        //}
         return super.onOptionsItemSelected(item);
     }
 }

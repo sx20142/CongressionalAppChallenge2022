@@ -58,15 +58,8 @@ public class LendPostActivity extends AppCompatActivity {
     ActionBar actionBar;
     EditText item_name, extra_info;
     Uri imageUri = null;
-    private static final int CAMERA_REQUEST = 100;
-    private static final int STORAGE_REQUEST = 200;
-    String[] cameraPermission;
-    String[] storagePermission;
-    private static final int IMAGE_PICK_GALLERY_REQUEST = 300;
-    private static final int IMAGE_PICK_CAMERA_REQUEST = 400;
     ProgressDialog pd;
     Spinner category, duration;
-    ArrayAdapter<String> categoryAdaptor, durationAdaptor;
     String name, email, uid, phone, dp, categorySelected, durationSelected;
     Button add_post;
 
@@ -100,14 +93,12 @@ public class LendPostActivity extends AppCompatActivity {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds: snapshot.getChildren())
-                {
+                for (DataSnapshot ds: snapshot.getChildren()) {
                     email = ""+ds.child("email").getValue();
                     name = ""+ds.child("name").getValue();
                     //dp = ""+ds.child("image").getValue();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
@@ -135,7 +126,6 @@ public class LendPostActivity extends AppCompatActivity {
         durationAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         duration.setAdapter(durationAdaptor);
 
-
         duration.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -152,21 +142,16 @@ public class LendPostActivity extends AppCompatActivity {
                 String title = item_name.getText().toString().trim();
                 String description = extra_info.getText().toString().trim();
 
-                // If empty set error
                 if (TextUtils.isEmpty(title)) {
                     item_name.setError("Title Cannot be empty");
                     Toast.makeText(LendPostActivity.this, "Title can not be left empty", Toast.LENGTH_LONG).show();
                     return;
                 }
-
-                // If empty set error
                 if (TextUtils.isEmpty(description)) {
                     extra_info.setError("Description Cant be empty");
                     Toast.makeText(LendPostActivity.this, "Description can not be left empty", Toast.LENGTH_LONG).show();
                     return;
                 }
-
-                //if image is empty
                 if (imageUri == null) {
                     //post without image
                     uploadData(title, description,"noImage");

@@ -44,14 +44,13 @@ import java.util.List;
 public class SecondSignUpActivity extends AppCompatActivity {
 
     //declare variables
-    //Spinner school_spinner;
     EditText school_input;
     EditText resHall_input;
     ListView school_list;
     ArrayAdapter<String> adapter;
     String email, password, name, phoneNum;
     Button signUp_btn;
-    ProgressDialog progressDialog; //progressbar to display while registering user
+    ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
 
     @Override
@@ -69,7 +68,6 @@ public class SecondSignUpActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         //initialize variables
-        //school_spinner = findViewById(R.id.school_spinner);
         school_input = findViewById(R.id.school_input);
         school_list = findViewById(R.id.school_list);
         resHall_input = findViewById(R.id.resHall_input);
@@ -219,12 +217,10 @@ public class SecondSignUpActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 SecondSignUpActivity.this.adapter.getFilter().filter(s);
             }
-
             @Override
             public void afterTextChanged(Editable s) {
             }
@@ -330,5 +326,4 @@ public class SecondSignUpActivity extends AppCompatActivity {
         onBackPressed(); //go to previous activity
         return super.onSupportNavigateUp();
     }
-
 }

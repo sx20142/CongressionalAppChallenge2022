@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/explorePageFragment"
-        android:name="com.example.shareme.LendExplorePageFragment"
+        android:name="com.example.shareme.LendPostFragment"
         android:label="fragment_lend_explore_page"
         tools:layout="@layout/fragment_lend_explore_page" />
     <fragment

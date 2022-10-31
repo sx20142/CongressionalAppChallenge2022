@@ -21,12 +21,12 @@
         <entry key="app/src/main/res/layout/fragment_borrow_page.xml" value="0.21603260869565216" />
         <entry key="app/src/main/res/layout/fragment_lend_explore_page.xml" value="0.13518518518518519" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.3713768115942029" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.18110236220472442" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/lend_notification_posts.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/lend_row_posts.xml" value="0.1" />
         <entry key="app/src/main/res/layout/notification_posts.xml" value="0.375" />
         <entry key="app/src/main/res/layout/row_posts.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/user_profile.xml" value="0.16296296296296298" />
+        <entry key="app/src/main/res/layout/user_profile.xml" value="0.1" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.184375" />
       </map>

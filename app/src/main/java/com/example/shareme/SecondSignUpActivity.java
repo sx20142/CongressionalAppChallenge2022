@@ -256,7 +256,6 @@ public class SecondSignUpActivity extends AppCompatActivity {
     private void registerUser(String email, String password) {
         //email and password pattern is valid, show progress dialog and start registering user
         progressDialog.show();
-
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -292,7 +291,7 @@ public class SecondSignUpActivity extends AppCompatActivity {
                             userInfo_hash.put("school", school);
                             userInfo_hash.put("resHall", resHall);
                             userInfo_hash.put("password", password);
-                            userInfo_hash.put("image", "");
+                            //userInfo_hash.put("image", "");
                             //firebase database instance
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             //path to store user data names "Users"

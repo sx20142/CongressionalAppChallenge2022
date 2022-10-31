@@ -201,6 +201,7 @@ public class BorrowPostAdapter extends RecyclerView.Adapter<BorrowPostAdapter.My
         String timeStamp = String.valueOf(System.currentTimeMillis());
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference data_ref = database.getReference("LendBorrow_Notifications");
+
         data_ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

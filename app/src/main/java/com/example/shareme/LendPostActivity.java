@@ -155,12 +155,12 @@ public class LendPostActivity extends AppCompatActivity {
                 if (imageUri == null) {
                     //post without image
                     uploadData(title, description,"noImage");
-                    startActivity(new Intent(LendPostActivity.this, AddPostFragment.class));
+                    startActivity(new Intent(LendPostActivity.this, DashboardActivity.class));
                 }
                 else {
                     //post with image
                     uploadData(title, description, String.valueOf(imageUri));
-                    startActivity(new Intent(LendPostActivity.this, AddPostFragment.class));
+                    startActivity(new Intent(LendPostActivity.this, DashboardActivity.class));
                 }
             }
         });

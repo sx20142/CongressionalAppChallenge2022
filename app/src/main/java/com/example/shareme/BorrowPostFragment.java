@@ -80,43 +80,11 @@ public class BorrowPostFragment extends Fragment {
                 postList.clear();
                 for (DataSnapshot ds: snapshot.getChildren()){
                     BorrowPostTemplate postTemplate = ds.getValue(BorrowPostTemplate.class);
-
                     postList.add(postTemplate);
                     //adapter
                     postAdapter = new BorrowPostAdapter(getActivity(), postList);
                     //set adapter to recyclerview
                     recyclerView.setAdapter(postAdapter);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                //in case of error
-                Toast.makeText(getActivity(), ""+error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void searchPosts(final String searchQuery){
-
-        //path of all posts
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Borrow_Posts");
-        //get all data from this ref
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                postList.clear();
-                for (DataSnapshot ds: snapshot.getChildren()){
-                    BorrowPostTemplate postTemplate = ds.getValue(BorrowPostTemplate.class);
-
-                    if (postTemplate.getpTitle().toLowerCase().contains(searchQuery.toLowerCase()) ||
-                            postTemplate.getpDescr().toLowerCase().contains(searchQuery.toLowerCase())){
-                        postList.add(postTemplate);
-                    }
-
-                    //adapter
-                    /*postAdapter = new LendPostAdapter(getActivity(), postList);
-                    //set adapter to recyclerview
-                    recyclerView.setAdapter(postAdapter);*/
                 }
             }
             @Override
@@ -146,6 +114,32 @@ public class BorrowPostFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);//to show menu option in fragment
         super.onCreate(savedInstanceState);
+    }
+
+    private void searchPosts(final String searchQuery){
+
+        //path of all posts
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Borrow_Posts");
+        //get all data from this ref
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                postList.clear();
+                for (DataSnapshot ds: snapshot.getChildren()){
+                    BorrowPostTemplate postTemplate = ds.getValue(BorrowPostTemplate.class);
+
+                    if (postTemplate.getpTitle().toLowerCase().contains(searchQuery.toLowerCase()) ||
+                            postTemplate.getpDescr().toLowerCase().contains(searchQuery.toLowerCase())){
+                        postList.add(postTemplate);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //in case of error
+                Toast.makeText(getActivity(), ""+error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     //inflate options menu

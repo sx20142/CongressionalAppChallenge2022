@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -169,12 +170,12 @@ public class BorrowPostActivity extends AppCompatActivity {
                 if (imageUri == null) {
                     //post without image
                     uploadData(title, description,"noImage");
-                    startActivity(new Intent(BorrowPostActivity.this, AddPostFragment.class));
+                    startActivity(new Intent(BorrowPostActivity.this, DashboardActivity.class));
                 }
                 else {
                     //post with image
                     uploadData(title, description, String.valueOf(imageUri));
-                    startActivity(new Intent(BorrowPostActivity.this, AddPostFragment.class));
+                    startActivity(new Intent(BorrowPostActivity.this, DashboardActivity.class));
                 }
             }
         });
